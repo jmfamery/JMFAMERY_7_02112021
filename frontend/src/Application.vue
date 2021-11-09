@@ -1,18 +1,18 @@
 <template>
   <div>
-    <Header/>
+    <Entete/>
     <Accueil/>
   </div>
 </template>
 
 <script>
-import Header from './components/Header.vue'
+import Entete from './components/Entete.vue'
 import Accueil from './components/Accueil.vue'
 
 export default {
   name: 'Application',
   components: {
-    Header,
+    Entete,
     Accueil
   }
 }
