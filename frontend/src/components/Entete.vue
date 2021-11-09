@@ -1,10 +1,16 @@
 <template>
+  <!-- <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </div> -->
   <div class="entete">
     <div class="container-fluid">
       <div class="row">
         <nav class="navbar navbar-dark">
           <div class="navbar-brand" style="height:85px">
-            <img src="../assets/icon-left-font-monochrome-white-v2.svg" alt="logo" />
+            <router-link to="/">
+              <img src="../assets/icon-left-font-monochrome-white-v2.svg" alt="logo" />
+            </router-link>
           </div>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
@@ -15,7 +21,7 @@
           <div id="navbarContent" class="collapse navbar-collapse">
             <ul class="navbar-nav text-end">
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Connection</a>
+                <router-link class="nav-link text-white" to="/connexion">Connexion</router-link>
               </li>
               
               <li class="nav-item">
@@ -27,7 +33,7 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Déconnection</a>
+                <a class="nav-link text-white" href="#">Déconnexion</a>
               </li>
             </ul>
           </div>
