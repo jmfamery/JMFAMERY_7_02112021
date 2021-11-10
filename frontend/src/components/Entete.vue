@@ -3,13 +3,13 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div> -->
-  <div class="entete">
+  <div class="fondpage">
     <div class="container-fluid">
       <div class="row">
         <nav class="navbar navbar-dark">
           <div class="navbar-brand" style="height:85px">
             <router-link to="/">
-              <img src="../assets/icon-left-font-monochrome-white-v2.svg" alt="logo" />
+              <img src="../assets/images/icon-left-font-monochrome-white-v2.svg" alt="logo" />
             </router-link>
           </div>
 
@@ -21,19 +21,19 @@
           <div id="navbarContent" class="collapse navbar-collapse">
             <ul class="navbar-nav text-end">
               <li class="nav-item">
-                <router-link class="nav-link text-white" to="/connexion">Connexion</router-link>
+                <router-link class="nav-link text-white fw-bold" to="/Connexion">Connexion</router-link>
               </li>
               
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Création profil</a>
+                <router-link class="nav-link text-white fw-bold" to="/creationProfil">Création profil</router-link>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Suppression profil</a>
+                <router-link class="nav-link text-white fw-bold" to="/SuppressionProfil">Suppression profil</router-link>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Déconnexion</a>
+                <router-link class="nav-link text-white fw-bold" to="/Deconnexion">Déconnexion</router-link>
               </li>
             </ul>
           </div>
@@ -49,6 +49,5 @@ export default {
 }   
 </script>
 
-<style>
-.entete {background-color: #122442}
+<style scoped src="../assets/css/fondPage.css">
 </style>

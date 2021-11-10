@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid text-center">
-    <h1 class="fs-1 pt-5">Groupomania - Intranet</h1>
-    <p class="fs-1">Bienvenue</p>
+    <h1 class="fw-bold fs-1 pt-5">Groupomania - Intranet</h1>
+    <p class="fw-bold fs-2 mb-5">Bienvenue</p>
     <p class="fs-4">
       Veuillez cliquer sur l'icon 
       <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list border border-dark border-2 rounded" viewBox="0 0 16 16">

@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid text-center">
-    <h1 class="fw-bold fs-1 py-5">Groupomania - Intranet</h1>
+    <h1 class="fw-bold fs-1 py-5">Groupomania - Intranet</h1>    
   </div>
 
   <div class="container d-flex justify-content-center">
@@ -10,7 +10,7 @@
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="fs-5">Veuillez saisir votre identifiant et votre mot de passe</p>
+                <p class="fs-5">Veuillez saisir les informations ci-dessous pour créer votre profil</p>
               </div>
             </div>
           </div>
@@ -44,6 +44,54 @@
   
             <div class="col-sm-8 bg-white">
               <p>abc123456</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body pt-0 mx-2">
+          <div class="row">
+            <div class="col-sm-3 fondpageClaire fw-bold">
+              <p>Nom :</p>
+            </div>
+
+            <div class="col-sm-1">
+              <p></p>
+            </div>
+  
+            <div class="col-sm-8 bg-white">
+              <p>UU</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body pt-0 mx-2">
+          <div class="row">
+            <div class="col-sm-3 fondpageClaire fw-bold">
+              <p>Prénom :</p>
+            </div>
+
+            <div class="col-sm-1">
+              <p></p>
+            </div>
+  
+            <div class="col-sm-8 bg-white">
+              <p>Uu</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body pt-0 mx-2">
+          <div class="row">
+            <div class="col-sm-3 fondpageClaire fw-bold">
+              <p>Modérateur :</p>
+            </div>
+
+            <div class="col-sm-1">
+              <p></p>
+            </div>
+  
+            <div class="col-sm-8 bg-white">
+              <p>Faux</p>
             </div>
           </div>
         </div>
