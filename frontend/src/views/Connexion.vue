@@ -18,15 +18,11 @@
   
         <div class="card-body pt-0 mx-2">
           <div class="row">
-            <div class="col-sm-3 fondpageClaire fw-bold">
+            <div class="col-sm-4 fondpageClaire fw-bold pt-3">
               <p>E-mail :</p>
             </div>
-
-            <div class="col-sm-1">
-              <p></p>
-            </div>
-  
-            <div class="col-sm-8 bg-white">
+ 
+            <div class="col-sm-8 bg-white pt-3">
               <p>uu.uu@goupomania.fr</p>
             </div>
           </div>
@@ -34,15 +30,11 @@
 
         <div class="card-body pt-0 mx-2">
           <div class="row">
-            <div class="col-sm-3 fondpageClaire fw-bold">
+            <div class="col-sm-4 fondpageClaire fw-bold pt-3">
               <p>Mot de passe :</p>
             </div>
-
-            <div class="col-sm-1">
-              <p></p>
-            </div>
   
-            <div class="col-sm-8 bg-white">
+            <div class="col-sm-8 bg-white pt-3">
               <p>abc123456</p>
             </div>
           </div>
@@ -51,7 +43,7 @@
         <div class="card-footer pb-4">
           <div class="row">
             <div class="col text-center">
-              <a class="btn fondpageClaire fw-bold fs-4" href="#">Valider</a>
+              <a class="btn fondpageClaire fw-bold fs-4" href="#">Connexion</a>
             </div>
           </div>
         </div>

@@ -19,7 +19,7 @@
         <div class="card-footer pb-4">
           <div class="row">
             <div class="col text-center">
-              <a class="btn fondpageClaire fw-bold fs-4" href="#">Confirmer</a>
+              <a class="btn fondpageClaire fw-bold fs-4" href="#">Suppression profil</a>
             </div>
           </div>
         </div>
