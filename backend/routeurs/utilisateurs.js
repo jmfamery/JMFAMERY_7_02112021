@@ -2,10 +2,10 @@ const express = require('express');
 const routeur = express.Router();
 
 const utilisateurCtrl = require('../controleurs/utilisateurs.js');
-const maximum = require('../intergiciel/connection.js');
+const maximum = require('../intergiciel/connexion.js');
 
 // Routeur sur la gestion de l'utilisateur
-routeur.post('/signup', utilisateurCtrl.signup);
-routeur.post('/login', maximum.limiteConnection , utilisateurCtrl.login);
+routeur.post('/inscrire', utilisateurCtrl.inscrire);
+routeur.post('/connexion', maximum.limiteConnexion , utilisateurCtrl.connexion);
 
 module.exports = routeur;

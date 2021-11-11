@@ -1,3 +1,12 @@
+const baseDonnees = require('../baseDonnees.js');
+const mysql = require('mysql');
+
+class Utilisateur {
+
+}
+
+module.exports = Utilisateur
+
 // const mongoose = require('mongoose');
 // const uniqueValidator = require('mongoose-unique-validator');
 

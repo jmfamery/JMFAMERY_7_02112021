@@ -5,7 +5,7 @@ require('dotenv').config();
 const codeSecurite = process.env.cleSecurite;
 
 // Création d'un utilisateur
-exports.signup = (req, res, next) => {
+exports.inscrire = (req, res, next) => {
   cryptage.hash(req.body.password, 10)
     .then(hash => {
       const utilisateur = new Utilisateur({
@@ -20,7 +20,7 @@ exports.signup = (req, res, next) => {
 };
 
 // contrôle d'accès d'un utilisateur
-exports.login = (req, res, next) => {
+exports.connexion = (req, res, next) => {
   Utilisateur.findOne({ email: req.body.email })
     .then(utilisateur => {
       if (!utilisateur) {

@@ -4,7 +4,8 @@ const telechargement = require('multer');
 const typeFormat = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
-  'image/png': 'png'
+  'image/png': 'png',
+  'image/gif': 'gif'
 };
 
 const sauvegarde = telechargement.diskStorage({
