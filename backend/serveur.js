@@ -14,8 +14,8 @@ function portValide(val) {
   return false;
 }
 
-// require('dotenv').config();
-// const numeroPort = process.env.DB_port;
+require('dotenv').config();
+const numeroPort = process.env.DB_port;
 
 const port = portValide(process.env.PORT || numeroPort);
 appliExpress.set('port', port);

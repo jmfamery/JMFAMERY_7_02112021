@@ -7,19 +7,19 @@ const password = process.env.DB_password;
 const database = process.env.DB_database;
 
 const baseDonnees = mysql.createConnection({
-    host: host,
-    user: user, 
-    password: password,
-    database : database 
-  });
- 
-  baseDonnees.connect(function(err) {
-    if (err) {
-      console.error('Impossible de se connecter!');
-      return;
-    }
-    console.log('Connecté à la base de données MySQL!');
-  });
+  host: host,
+  user: user,
+  password: password,
+  database: database
+});
+
+baseDonnees.connect(function (err) {
+  if (err) {
+    console.error('Impossible de se connecter!');
+    return;
+  }
+  console.log('Connecté à la base de données MySQL!');
+});
 
 module.exports = baseDonnees;
 
@@ -53,7 +53,7 @@ module.exports = appliExpress;
 
 // Sécurité : il nettoie les entrées utilisateur provenant du corps de la requête
 const xssClean = require('xss-clean');
-const clean = require('xss-clean/lib/xss').clean 
+const clean = require('xss-clean/lib/xss').clean
 const cleaned = clean('<script></script>')
 
 // Connection à la base de donnée

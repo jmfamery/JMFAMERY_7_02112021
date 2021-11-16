@@ -3,42 +3,55 @@ const baseDonnees = require('../applications.js');
 const mysql = require('mysql');
 
 class Utilisateur {
-  constructor() {
-  }
-  inscrire(donnees){
-    let sql = 'INSERT INTO utilisateur VALUES(NULL, ?, ?, ?, ?, ?)';
+  constructor() {}
+  inscrire(donnees) {
+    let sql = 'INSERT INTO utilisateur (email, mot_passe, nom, prenom, moderateur) VALUES(?, ?, ?, ?, ?)';
     sql = mysql.format(sql, donnees);
-    return new Promise((resolve, reject) =>{
-        baseDonnees.query(sql, function(err, res){
-            if (err) reject({error : 'Erreur dans l\'inscription'});
-            resolve({message : 'Nouveau utilisateur !'})
+    return new Promise((resolve, reject) => {
+      baseDonnees.query(sql, function (err, res) {
+        if (err) reject({
+          error: 'Erreur dans l\'inscription'
+        });
+        resolve({
+          message: 'Nouveau utilisateur !'
         })
+      })
     })
   }
 
-  connexion(donnees){
+  connexion(donnees) {
     let sql = 'SELECT * FROM utilisateur WHERE email = ?';
-    sql = mysql.format(sql, donnees);    
-    return new Promise((resolve, reject) =>{
-        baseDonnees.query(sql, function(err, res){
-            if (err) reject({ err });
-            if (!res[0]){
-                reject ({ error : 'Utilisateur inconnu!'});
-            }
-            resolve({message : 'Utilisateur trouvé!'}) 
+    sql = mysql.format(sql, donnees);
+    return new Promise((resolve, reject) => {
+      baseDonnees.query(sql, function (err, res) {
+        if (err) reject({
+          err
+        });
+        if (!res[0]) {
+          reject({
+            error: 'Utilisateur inconnu!'
+          });
+        }
+        resolve({
+          utilisateur: res[0]
         })
-    
+      })
+
     })
   }
 
-  suppression(donnees){
-    let sql = 'DELETE FROM users WHERE id = ?'; 
-    sql = mysql.format(sql,donnees);
-    return new Promise((resolve, reject) =>{
-        baseDonnees.query(sql, function(err, result){
-            if (err) return reject({error : 'fonction indisponible'});
-            resolve({message : 'Utilisateur supprimé'});
-        }) 
+  suppression(donnees) {
+    let sql = 'DELETE FROM users WHERE id = ?';
+    sql = mysql.format(sql, donnees);
+    return new Promise((resolve, reject) => {
+      baseDonnees.query(sql, function (err, result) {
+        if (err) return reject({
+          error: 'fonction indisponible'
+        });
+        resolve({
+          message: 'Utilisateur supprimé'
+        });
+      })
     })
   }
 }
