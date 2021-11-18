@@ -4,6 +4,7 @@ import Connexion from '../views/Connexion.vue'
 import CreationProfil from '../views/CreationProfil.vue'
 import SuppressionProfil from '../views/SuppressionProfil.vue'
 import Deconnexion from '../views/Deconnexion.vue'
+import Articles from '../views/Articles.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/Deconnexion',
     name: 'Deconnexion',
     component: Deconnexion
+  },
+  {
+    path: '/Articles',
+    name: 'Articles',
+    component: Articles
   },
 ]
 

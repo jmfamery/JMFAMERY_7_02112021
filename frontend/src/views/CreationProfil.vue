@@ -21,7 +21,7 @@
             <div class="col-sm-6 pt-3">
               <input
                 class="form-control"
-                type="text"
+                type="email"
                 placeholder="Votre email"
                 id="email"
                 required
@@ -34,7 +34,7 @@
             <div class="col-sm-6 pt-3">
               <input
                 class="form-control"
-                type="text"
+                type="password"
                 placeholder="Votre mot de passe"
                 id="mot_passe"
                 required
@@ -131,28 +131,32 @@ export default {
     // envoi des données pour la création du profil
     nouveauProfil() {
       console.log("Valider")
-      // const emailValider = document.getElementById("email").checkValidity();
-      // const mot_passeValider = document.getElementById("mot_passe").checkValidity();
-      // const nomValider = document.getElementById("nom").checkValidity();
-      // const prenomValider = document.getElementById("prenom").checkValidity();
-      // const moderateurvalider = document.getElementById("moderateur");
-      // if (emailValider && mot_passeValider && nomValider && prenomValider && moderateurvalider) {
-      //   this.$emit("donnees-envoyees", this.$data);
-      // } 
-      const axios = require('axios').default
-      axios.post('http://localhost:3000/api/auth/inscrire', {
-        email: this.email,
-        mot_passe: this.mot_passe,
-        nom: this.nom,
-        prenom: this.prenom,
-        moderateur: this.moderateur
-      })
-        .then(function () {
-          this.$router.push('/Connexion');
+      // if (this.email && this.mot_passe && this.nom && this.prenom) {
+        const axios = require('axios').default
+        axios.post('http://localhost:3000/api/auth/inscrire', {
+          email: this.email,
+          mot_passe: this.mot_passe,
+          nom: this.nom,
+          prenom: this.prenom,
+          moderateur: this.moderateur
         })
-        .catch(function (error) {
-          alert(error);
-        });
+          .then(function () {
+            this.$router.push('/Articles');
+          })
+          .catch(function (error) {
+            alert(error);
+            console.log(error)
+          });
+      // } { if (!this.email) {
+      //       alert("Veuillez saisir votre mail")
+      //     } { if (!this.mot_passe)
+      //           alert("Veuillez saisir le mot de passe")
+      //         } { if (!this.mot_nom)
+      //             alert("Veuillez saisir votre nom")
+      //           } { if (!this.mot_prenom)
+      //               alert("Veuillez saisir votre prenom")
+      //             }
+      //   }
     }
   }
 }

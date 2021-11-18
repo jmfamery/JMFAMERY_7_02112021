@@ -9,6 +9,7 @@ const utilisateur = new Utilisateur();
 
 // Création d'un utilisateur
 exports.inscrire = (req, res, next) => {
+  console.log("inscrire Backend")
   cryptage.hash(req.body.mot_passe, 10)
     .then(hash => {
       const donnees = [req.body.email, hash, req.body.nom, req.body.prenom, req.body.moderateur]
@@ -27,6 +28,7 @@ exports.inscrire = (req, res, next) => {
 
 // contrôle d'accès d'un utilisateur
 exports.connexion = (req, res, next) => {
+  console.log("connexion Backend")
   utilisateur.connexion(req.body.email)
     .then(utilisateur => {
       if (!utilisateur) {
