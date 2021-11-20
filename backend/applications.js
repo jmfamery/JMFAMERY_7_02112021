@@ -44,7 +44,7 @@ appliExpress.use(express.json());
 appliExpress.use('/images', express.static(chemin.join(__dirname, 'images')));
 
 appliExpress.use('/api/sauces', saucesRouteurs);
-appliExpress.use('/api/auth', utilisateurRouteurs);
+appliExpress.use('/api/utilisateur', utilisateurRouteurs);
 
 appliExpress.use(helmet()); // Sécurité : il définit des en-têtes de réponse HTTP
 appliExpress.use(hpp()); // Sécurité : il évite les attaques de pollution des paramètres HTTP

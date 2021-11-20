@@ -133,15 +133,16 @@ export default {
       console.log("Valider")
       // if (this.email && this.mot_passe && this.nom && this.prenom) {
         const axios = require('axios').default
-        axios.post('http://localhost:3000/api/auth/inscrire', {
+        axios.post('http://localhost:3000/api/utilisateur/inscrire', {
           email: this.email,
           mot_passe: this.mot_passe,
           nom: this.nom,
           prenom: this.prenom,
           moderateur: this.moderateur
         })
-          .then(function () {
-            this.$router.push('/Articles');
+          .then(function (reponse) {
+            console.log(reponse)
+            //this.$router.push('/Articles');
           })
           .catch(function (error) {
             alert(error);

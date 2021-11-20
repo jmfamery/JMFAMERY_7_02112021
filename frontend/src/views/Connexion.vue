@@ -173,29 +173,31 @@ export default {
     // envoi des données pour la création du profil
     connexion() {
       const axios = require('axios').default
+      const aller = this  
       if (this.mode == 'creation') {
-        console.log("Création du compte")  
-          axios.post('http://localhost:3000/api/auth/inscrire', {
-            email: this.email,
-            mot_passe: this.mot_passe,
-            nom: this.nom,
-            prenom: this.prenom,
-            moderateur: this.moderateur
-            })
-            .then(function () {
-              this.$router.push('/Articles')
-            })
-            .catch(function (error) {
-              alert(error)
-            })
+        console.log("Création du compte")
+        axios.post('http://localhost:3000/api/utilisateur/inscrire', {
+          email: this.email,
+          mot_passe: this.mot_passe,
+          nom: this.nom,
+          prenom: this.prenom,
+          moderateur: this.moderateur
+          })
+          .then(function () {
+            aller.$router.push('/Articles')
+          })
+          .catch(function (error) {
+            alert(error)
+            console.log(error)
+          })
         } if (this.mode == 'connexion') {
           console.log("Connexion")
-          axios.post('http://localhost:3000/api/auth/connexion', {
+          axios.post('http://localhost:3000/api/utilisateur/connexion', {
             email: this.email,
             mot_passe: this.mot_passe
             })
             .then(function () {
-              this.$router.push('/Articles');
+              aller.$router.push('/Articles');
             })
             .catch(function (error) {
               alert(error)
