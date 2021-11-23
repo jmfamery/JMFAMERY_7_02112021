@@ -55,14 +55,3 @@ module.exports = appliExpress;
 const xssClean = require('xss-clean');
 const clean = require('xss-clean/lib/xss').clean
 const cleaned = clean('<script></script>')
-
-// Connection à la base de donnée
-// const mongoose = require('mongoose');
-// require('dotenv').config();
-// const mongoDB = process.env.DB_mongoDB;
-
-// mongoose.connect(mongoDB,
-//   { useNewUrlParser: true,
-//     useUnifiedTopology: true })
-//   .then(() => console.log('Connexion à MongoDB réussie !'))
-//   .catch(() => console.log('Connexion à MongoDB échouée !'));

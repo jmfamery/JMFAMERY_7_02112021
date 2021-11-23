@@ -1,37 +1,37 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Accueil from '../views/Accueil.vue'
+// import Accueil from '../views/Accueil.vue'
 import Connexion from '../views/Connexion.vue'
-import CreationProfil from '../views/CreationProfil.vue'
+// import CreationProfil from '../views/CreationProfil.vue'
 import SuppressionProfil from '../views/SuppressionProfil.vue'
-import Deconnexion from '../views/Deconnexion.vue'
+// import Deconnexion from '../views/Deconnexion.vue'
 import Articles from '../views/Articles.vue'
 
 const routes = [
+  // {
+  //   path: '/',
+  //   name: 'Accueil',
+  //   component: Accueil
+  // },
   {
     path: '/',
-    name: 'Accueil',
-    component: Accueil
-  },
-  {
-    path: '/Connexion',
     name: 'Connexion',
     component: Connexion
   },
-  {
-    path: '/CreationProfil',
-    name: 'CreationProfil',
-    component: CreationProfil
-  },
+  // {
+  //   path: '/CreationProfil',
+  //   name: 'CreationProfil',
+  //   component: CreationProfil
+  // },
   {
     path: '/SuppressionProfil',
     name: 'SuppressionProfil',
     component: SuppressionProfil
   },
-  {
-    path: '/Deconnexion',
-    name: 'Deconnexion',
-    component: Deconnexion
-  },
+  // {
+  //   path: '/Deconnexion',
+  //   name: 'Deconnexion',
+  //   component: Deconnexion
+  // },
   {
     path: '/Articles',
     name: 'Articles',

@@ -1,7 +1,7 @@
 // Modèle de la base de données d'un utilisateur
 const baseDonnees = require('../applications.js');
 const mysql = require('mysql');
-const cryptage = require('bcrypt');
+const chiffrer = require('bcrypt');
 const authentification = require('jsonwebtoken');
 require('dotenv').config();
 const codeSecurite = process.env.cleSecurite;
@@ -28,16 +28,12 @@ class Utilisateur {
     sql = mysql.format(sql, mail);
     return new Promise((resolve, reject) => {
       baseDonnees.query(sql, function (err, res) {
-        console.log("mail : ",mail)
-        console.log("sql : ",res[0].mot_passe)
-        console.log("saisi : ",mot_passe)
-        console.log("Id : ",res[0].id)
         if (!res[0]) {
           reject({
             error: 'Utilisateur inconnu!'
           })
         } {
-          cryptage.compare(mot_passe, res[0].mot_passe)
+          chiffrer.compare(mot_passe, res[0].mot_passe)
             .then(valid => { 
               if (!valid) return reject({ error: 'Mot de passe incorrect !' });
               resolve({
@@ -48,20 +44,19 @@ class Utilisateur {
                     expiresIn: '24h'
                   } 
                 )
-              }, console.log("Ok contrôle")
+              }, 
+                console.log("Mot de passe correct !"),
+                console.log(res[0])
               );
             })
             .catch(error => reject({ error }));
           }
-        // resolve({
-        //   utilisateur: res[0]
-        // })
       })      
     })
   }
 
   suppression(donnees) {
-    let sql = 'DELETE FROM users WHERE id = ?';
+    let sql = 'DELETE FROM utilisateur WHERE id = ?';
     sql = mysql.format(sql, donnees);
     return new Promise((resolve, reject) => {
       baseDonnees.query(sql, function (err, result) {
@@ -77,16 +72,3 @@ class Utilisateur {
 }
 
 module.exports = Utilisateur
-
-// const mongoose = require('mongoose');
-// const uniqueValidator = require('mongoose-unique-validator');
-
-// Modéle d'utilsateur avec sécutité
-// const utilisateurSchema = mongoose.Schema({
-//   email: { type: String, required: true, unique: true },
-//   password: { type: String, required: true }
-// });
-
-// utilisateurSchema.plugin(uniqueValidator);
-
-// module.exports = mongoose.model('Utilisateur', utilisateurSchema);

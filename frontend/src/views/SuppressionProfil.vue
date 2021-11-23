@@ -19,7 +19,7 @@
         <div class="card-footer pb-4">
           <div class="row">
             <div class="col text-center">
-              <a class="btn fondpageClaire fw-bold fs-4" href="#">Suppression profil</a>
+              <a class="btn fondpageClaire fw-bold fs-4"  @click="suppression()">Suppression profil</a>
             </div>
           </div>
         </div>
@@ -27,6 +27,38 @@
     </div>
   </div>
 </template>
+
+<script>
+
+export default {
+  name: "Suppression",
+  data: () => {
+    return {
+      id: ''
+    }
+  },
+
+methods: {
+  // Suppression du profil
+  suppression() {
+    const axios = require('axios').default
+    const aller = this 
+    console.log("Suppression")
+    console.log("Id utilisateur : ", )
+    axios.delete('http://localhost:3000/api/utilisateur/suppression', {
+      id: this.id
+      })
+      .then(function (result) {
+        aller.$router.push('/'),
+        console.log(result.data)
+      })
+      .catch(function (error) {
+        alert(error)
+      })
+    }
+  }
+}
+</script>
 
 <style scoped src="../assets/css/fondPage.css">
 </style>

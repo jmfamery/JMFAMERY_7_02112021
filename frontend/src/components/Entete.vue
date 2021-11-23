@@ -1,12 +1,8 @@
 <template>
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div> -->
   <div class="fondpage">
     <div class="container-fluid">
       <div class="row">
-        <nav class="navbar navbar-dark">
+        <nav class="navbar navbar-expand-md navbar-dark">
           <div class="navbar-brand" style="height:85px">
             <router-link to="/">
               <img src="../assets/images/icon-left-font-monochrome-white-v2.svg" alt="logo" />
@@ -18,22 +14,22 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div id="navbarContent" class="collapse navbar-collapse">
+          <div id="navbarContent" class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav text-end">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <router-link class="nav-link text-white fw-bold" to="/Connexion">Connexion</router-link>
               </li>
               
               <li class="nav-item">
                 <router-link class="nav-link text-white fw-bold" to="/creationProfil">Création profil</router-link>
-              </li>
+              </li> -->
 
               <li class="nav-item">
                 <router-link class="nav-link text-white fw-bold" to="/SuppressionProfil">Suppression profil</router-link>
               </li>
 
               <li class="nav-item">
-                <router-link class="nav-link text-white fw-bold" to="/Deconnexion">Déconnexion</router-link>
+                <router-link class="nav-link text-white fw-bold" to="/">Déconnexion</router-link>
               </li>
             </ul>
           </div>

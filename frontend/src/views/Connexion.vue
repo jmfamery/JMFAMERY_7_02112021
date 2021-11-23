@@ -11,10 +11,10 @@
             <div class="col">
               <div class="card-tilte">
                 <h1 class="fs-3" v-if="mode == 'connexion'">
-                  Connexion
+                  Connexion au site
                 </h1>
                 <h1 class="fs-3" v-else>
-                  Inscription
+                  Inscription au site
                 </h1>
               </div>
             </div>
@@ -170,7 +170,7 @@ export default {
       this.mode = 'connexion'
     },
 
-    // envoi des données pour la création du profil
+    // envoi des données pour la création ou la connexion du profil
     connexion() {
       const axios = require('axios').default
       const aller = this  
@@ -183,10 +183,12 @@ export default {
           prenom: this.prenom,
           moderateur: this.moderateur
           })
-          .then(function () {
-            aller.$router.push('/Articles')
+          .then((resultat) => {
+            aller.$router.push('/Articles'),
+            localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
+            console.log(resultat.data)
           })
-          .catch(function (error) {
+          .catch((error) => {
             alert(error)
             console.log(error)
           })
@@ -196,10 +198,12 @@ export default {
             email: this.email,
             mot_passe: this.mot_passe
             })
-            .then(function () {
-              aller.$router.push('/Articles');
-            })
-            .catch(function (error) {
+            .then((resultat) => {
+              localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
+              console.log(resultat.data),
+              aller.$router.push('/Articles')
+              })
+            .catch((error) => {
               alert(error)
             })
           } 

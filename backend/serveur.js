@@ -25,14 +25,14 @@ const portErreur = error => {
     throw error;
   }
   const addresse = serveur.address();
-  const bind = typeof addresse === 'string' ? 'pipe ' + addresse : 'port: ' + port;
+  const bind = typeof addresse === 'string' ? 'L\'addresse ' + addresse : 'du port: ' + port;
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges.');
+      console.error(bind + ' nécessite des privilèges élevés.');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use.');
+      console.error(bind + ' est déjà en cours d\'utilisation.');
       process.exit(1);
       break;
     default:
@@ -45,8 +45,8 @@ const serveur = http.createServer(appliExpress);
 serveur.on('error', portErreur);
 serveur.on('listening', () => {
   const addresse = serveur.address();
-  const bind = typeof addresse === 'string' ? 'pipe ' + addresse : 'port ' + port;
-  console.log('Listening on ' + bind);
+  const bind = typeof addresse === 'string' ? 'L\'addresse ' + addresse : 'port ' + port;
+  console.log('Connexion sur le ' + bind);
 });
 
 serveur.listen(port);
