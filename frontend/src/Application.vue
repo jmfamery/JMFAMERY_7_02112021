@@ -1,17 +1,11 @@
 <template>
-  <Entete/>
   <router-view/>
 </template>
 
 <script>
-import Entete from './components/Entete.vue'
-
 export default {
-  name: 'Application',
-  components: {
-    Entete
+  name: 'Application'
   }
-}
 </script>
 
 <!-- <div id="nav">

@@ -15,21 +15,13 @@
           </button>
 
           <div id="navbarContent" class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav text-end">
-              <!-- <li class="nav-item">
-                <router-link class="nav-link text-white fw-bold" to="/Connexion">Connexion</router-link>
-              </li>
-              
+            <ul class="navbar-nav my-1">
               <li class="nav-item">
-                <router-link class="nav-link text-white fw-bold" to="/creationProfil">Création profil</router-link>
-              </li> -->
-
-              <li class="nav-item">
-                <router-link class="nav-link text-white fw-bold" to="/SuppressionProfil">Suppression profil</router-link>
+                <button class="nav-link text-white fw-bold border-0 fondpage" @click="suppression()">Suppression profil</button>
               </li>
 
               <li class="nav-item">
-                <router-link class="nav-link text-white fw-bold" to="/">Déconnexion</router-link>
+                <button class="nav-link text-white fw-bold border-0 fondpage" @click="deconnexion()">Déconnexion</button>
               </li>
             </ul>
           </div>
@@ -41,7 +33,16 @@
 
 <script>
 export default {
-    name: 'Entete'
+  name: 'Entete',
+  methods: {
+    suppression () {
+      this.$router.push('/SuppressionProfil')
+    },
+    deconnexion () {
+      this.$router.push('/Deconnexion'),
+      localStorage.clear()
+    }
+  }
 }   
 </script>
 

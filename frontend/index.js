@@ -9,9 +9,9 @@ export default createStore({
   mutations: {
     //si le localStorage contient un token, on est considéré comme authentifié
     initializeStore(state) {
-      if (localStorage.getItem('Utisateur')) {
-        const user = localStorage.getItem('Utilisateur');
-        const token = utilisateur.token;
+      if (localStorage.getItem('User')) {
+        const user = localStorage.getItem('User');
+        const token = user.token;
         state.token = token
         state.isAuthenticated = true
       } else {

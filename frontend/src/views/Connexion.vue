@@ -1,6 +1,8 @@
 <template>
+  <Logo />
   <div class="container-fluid text-center">
-    <h1 class="fw-bold fs-1 py-5">Groupomania - Intranet</h1>
+    <h1 class="fw-bold fs-1 pt-5 mb-2">Groupomania</h1>
+    <p class="fw-bold fs-2 mb-5">Bienvenue sur le site Intranet</p>
   </div>
 
   <div class="container d-flex justify-content-center">
@@ -10,12 +12,12 @@
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <h1 class="fs-3" v-if="mode == 'connexion'">
+                <h2 class="fs-3" v-if="mode == 'connexion'">
                   Connexion au site
-                </h1>
-                <h1 class="fs-3" v-else>
+                </h2>
+                <h2 class="fs-3" v-else>
                   Inscription au site
-                </h1>
+                </h2>
               </div>
             </div>
           </div>
@@ -129,7 +131,6 @@
           </div>
         </div>
         
-
         <div class="card-footer pb-4">
           <div class="row">
             <div class="col text-center">
@@ -148,67 +149,70 @@
 </template>
 
 <script>
+import axios from "axios";
+import Logo from "../components/Logo.vue";
+
 export default {
   name: "Connexion",
+  components: { Logo }, 
   data: () => {
     return {
-      mode: 'connexion',
-      email: '',
-      mot_passe: '',
-      nom: '',
-      prenom: '',
+      mode: "connexion",
+      email: "",
+      mot_passe: "",
+      nom: "",
+      prenom: "",
       moderateur: false,
-    }
+    };
   },
 
   methods: {
     creercompte() {
-      this.mode = 'creation'
+      this.mode = "creation";
     },
-
     accescompte() {
-      this.mode = 'connexion'
+      this.mode = "connexion";
     },
-
     // envoi des données pour la création ou la connexion du profil
     connexion() {
-      const axios = require('axios').default
-      const aller = this  
-      if (this.mode == 'creation') {
-        console.log("Création du compte")
-        axios.post('http://localhost:3000/api/utilisateur/inscrire', {
-          email: this.email,
-          mot_passe: this.mot_passe,
-          nom: this.nom,
-          prenom: this.prenom,
-          moderateur: this.moderateur
+      if (this.mode == "creation") {
+        console.log("Création du compte");
+        axios
+          .post("/utilisateur/inscrire", {
+            email: this.email,
+            mot_passe: this.mot_passe,
+            nom: this.nom,
+            prenom: this.prenom,
+            moderateur: this.moderateur
           })
           .then((resultat) => {
-            aller.$router.push('/Articles'),
+            this.$router.push("/Articles"),
             localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
-            console.log(resultat.data)
+            console.log(resultat.data);
           })
           .catch((error) => {
-            alert(error)
-            console.log(error)
-          })
-        } if (this.mode == 'connexion') {
-          console.log("Connexion")
-          axios.post('http://localhost:3000/api/utilisateur/connexion', {
+            alert(error);
+            console.log(error);
+          });
+      }
+      if (this.mode == "connexion") {
+        console.log("Connexion");
+        axios
+          .post("/utilisateur/connexion", {
             email: this.email,
             mot_passe: this.mot_passe
-            })
-            .then((resultat) => {
-              localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
-              console.log(resultat.data),
-              aller.$router.push('/Articles')
-              })
-            .catch((error) => {
-              alert(error)
-            })
-          } 
+          })
+          .then((resultat) => {
+            localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
+            console.log(resultat.data),
+            this.$router.push("/Articles");
+          })
+          .catch((error) => {
+            alert(error);
+          });
       }
-  }
+    }
+  },
 }
 </script>
 

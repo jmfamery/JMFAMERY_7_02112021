@@ -1,14 +1,20 @@
 <template>
+  <Entete />
   <div class="container-fluid text-center">
-    <h1 class="fw-bold fs-1 pt-5">Groupomania - Intranet</h1>
-    <p class="fw-bold fs-2 mb-5">Bienvenue</p>
+    <h1 class="fw-bold fs-1 pt-5">Groupomania</h1>
     <p class="fs-4">
-      Vous êtes sur la page de consultation des article
+      Vous êtes sur la page de consultation des articles
     </p>
   </div>
 </template>
 
 <script>
+import Entete from "../components/Entete.vue"
+
+export default {
+    name: "Accueil",
+    components: { Entete }, 
+}
 </script>
 
 <style>
