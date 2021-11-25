@@ -69,24 +69,13 @@ exports.connexion = (req, res) => {
     })
 }
 
-exports.suppression = (req, res, next) => {
+exports.suppression = (req, res) => {
   console.log("suppression Backend")
-  const id = req.body.id
-  console.log(id)
-  // let sql = 'DELETE FROM utilisateur WHERE id = ?';
-  // baseDonnees.query(sql, req.body.id, (err, data) => {
-  //   if (err) return reject({
-  //     error: 'fonction indisponible'
-  //   });
-  //   resolve({
-  //     message: 'Utilisateur supprimé'
-  //   });
-  // })
-  // utilisateur.suppression(req.body.id)
-  //   .then(() => res.status(200).json({
-  //     message: 'Profil supprimer !'
-  //   }))
-  //   .catch((error) => res.status(400).json({
-  //     error
-  //   }))
+  let sql = 'DELETE FROM utilisateur WHERE id = ?';
+  baseDonnees.query(sql, req.body.id, (err) => {
+    if (err) {
+      return res.status(400).json({ err: "La suppression du compte n'a pas été fait" });
+    } 
+      res.status(200).json({ message: "Votre compte a été supprimé !" })
+    })
 }

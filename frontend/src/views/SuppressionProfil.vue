@@ -47,16 +47,16 @@ methods: {
   suppressionProfil() {
     console.log("Suppression")
     const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-    console.log(utilisateur.id)
     axios
       .delete("/utilisateur/suppression", {
-      id: utilisateur.id
+      data: {id: utilisateur.id}
       })
-      .then(function (result) {
-        this.$router.push('/Deconnexion'),
-        console.log(result.data)
+      .then((resultat) => {
+        this.$router.push('/Deconnexion')
+        localStorage.clear()
+        console.log(resultat.data)
       })
-      .catch(function (error) {
+      .catch((error) => {
         alert(error)
       })
     }

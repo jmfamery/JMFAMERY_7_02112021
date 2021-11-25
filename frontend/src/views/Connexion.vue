@@ -174,7 +174,10 @@ export default {
       this.mode = "connexion";
     },
     // envoi des données pour la création ou la connexion du profil
-    connexion() {
+    connexion() {       
+      if ((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(this.mot_passe)) == true) {
+        console.log("Ok")
+      }
       if (this.mode == "creation") {
         console.log("Création du compte");
         axios
@@ -185,15 +188,15 @@ export default {
             prenom: this.prenom,
             moderateur: this.moderateur
           })
-          .then((resultat) => {
-            this.$router.push("/Articles"),
+          .then((resultat) => {            
             localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
-            console.log(resultat.data);
+            console.log(resultat.data),
+            this.$router.push("/Articles")
           })
           .catch((error) => {
             alert(error);
             console.log(error);
-          });
+          });          
       }
       if (this.mode == "connexion") {
         console.log("Connexion");
@@ -205,10 +208,10 @@ export default {
           .then((resultat) => {
             localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
             console.log(resultat.data),
-            this.$router.push("/Articles");
+            this.$router.push("/Articles")
           })
           .catch((error) => {
-            alert(error);
+            alert(error)
           });
       }
     }
