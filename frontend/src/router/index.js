@@ -1,14 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Connexion from '../views/Connexion.vue'
+import Connexion from '../views/ConnexionNV.vue'
+import Inscritpion from '../views/Inscription.vue'
 import SuppressionProfil from '../views/SuppressionProfil.vue'
 import Deconnexion from '../views/Deconnexion.vue'
 import Articles from '../views/Articles.vue'
+// import Signup from '../views/Signup.vue'
 
 const routes = [
+  // {
+  //   path: '/',
+  //   name: 'Signup',
+  //   component: Signup
+  // },
   {
     path: '/',
     name: 'Connexion',
     component: Connexion
+  },
+  {
+    path: '/Inscription',
+    name: 'Inscription',
+    component: Inscritpion
   },
   {
     path: '/SuppressionProfil',

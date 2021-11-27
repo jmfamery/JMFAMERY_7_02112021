@@ -96,7 +96,11 @@
                   aria-label="Entrez votre nom"
                   v-model="nom"
                 />
+                <div class=" text-center text-white" v-if="error">
+                  {{ error }}
+                </div>
               </div>
+
 
               <div class="col-sm-6 pt-3">
                 <input
@@ -175,9 +179,6 @@ export default {
     },
     // envoi des données pour la création ou la connexion du profil
     connexion() {       
-      if ((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(this.mot_passe)) == true) {
-        console.log("Ok")
-      }
       if (this.mode == "creation") {
         console.log("Création du compte");
         axios
