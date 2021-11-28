@@ -27,8 +27,9 @@ module.exports = baseDonnees;
 const express = require('express');
 const appliExpress = express();
 const chemin = require('path');
-const saucesRouteurs = require('./routeurs/sauces.js');
-const utilisateurRouteurs = require('./routeurs/utilisateurs.js');
+const articlesRouteurs = require('./routeurs/articles.js');
+const commentairesRouteurs = require('./routeurs/commentaires.js');
+const utilisateursRouteurs = require('./routeurs/utilisateurs.js');
 const helmet = require('helmet');
 const hpp = require('hpp');
 
@@ -43,8 +44,9 @@ appliExpress.use(express.json());
 
 appliExpress.use('/images', express.static(chemin.join(__dirname, 'images')));
 
-appliExpress.use('/api/sauces', saucesRouteurs);
-appliExpress.use('/api/utilisateur', utilisateurRouteurs);
+appliExpress.use('/api/article', articlesRouteurs);
+appliExpress.use('/api/commentaire', commentairesRouteurs);
+appliExpress.use('/api/utilisateur', utilisateursRouteurs);
 
 appliExpress.use(helmet()); // Sécurité : il définit des en-têtes de réponse HTTP
 appliExpress.use(hpp()); // Sécurité : il évite les attaques de pollution des paramètres HTTP
