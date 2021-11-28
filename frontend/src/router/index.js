@@ -1,17 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Connexion from '../views/ConnexionNV.vue'
+import Connexion from '../views/Connexion.vue'
 import Inscritpion from '../views/Inscription.vue'
 import SuppressionProfil from '../views/SuppressionProfil.vue'
 import Deconnexion from '../views/Deconnexion.vue'
 import Articles from '../views/Articles.vue'
-// import Signup from '../views/Signup.vue'
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'Signup',
-  //   component: Signup
-  // },
   {
     path: '/',
     name: 'Connexion',

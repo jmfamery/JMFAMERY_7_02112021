@@ -151,7 +151,7 @@ export default {
         .then((resultat) => {            
           localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
           console.log(resultat.data),
-          this.$router.push("/Articles")
+          this.$router.push("/")
         })
         .catch((error) => {
           alert(error);

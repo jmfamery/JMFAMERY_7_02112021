@@ -31,15 +31,32 @@
           </div>
         </div>
 
-
         <div class="card-body py-0 mx-2">
           <div class="row">
             <div class="col-sm-6 pt-3">
-              <Email/>
+              <input
+                class="form-control"
+                type="email"
+                placeholder="Votre email"
+                id="email"
+                required
+                maxlength="30"
+                aria-label="Entrez votre E-mail"
+                v-model="email"
+              />
             </div>
 
             <div class="col-sm-6 pt-3">
-              <MotPasse/>
+              <input
+                class="form-control"
+                type="password"
+                placeholder="Votre mot de passe"
+                id="mot_passe"
+                required
+                maxlength="30"
+                aria-label="Entrez votre mot de passe"
+                v-model="mot_passe"
+              />
             </div>
           </div>
         </div>
@@ -47,11 +64,7 @@
         <div class="card-footer py-4">
           <div class="row">
             <div class="col text-center">
-              <button class="btn fondpageClaire fw-bold fs-4"           
-                :disabled="isSignupButtonDisabled"
-                @click="loginButtonPressed">
-                Se connecter
-              </button>
+              <button class="btn fondpageClaire fw-bold fs-4" @click="connexion()">Se connecter</button>
             </div>
           </div>
         </div>
@@ -61,22 +74,12 @@
 </template>
 
 <script>
-import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import Logo from "../components/Logo.vue";
-import Email from "./Email.vue"
-import MotPasse from "./MotPasse.vue"
-
-import useFormValidation from "../modules/useFormValidation";
-import useSubmitButtonState from "../modules/useSubmitButtonState";
 
 export default {
   name: "Connexion",
-  components: {
-    Logo,
-    Email,
-    MotPasse
-  },
+  components: { Logo },
 
   data: () => {
     return {
@@ -85,26 +88,6 @@ export default {
       nom: "",
       prenom: "",
       moderateur: false,
-    };
-  },
-
-  setup() {
-    let user = reactive({
-      email: "",
-      password: "",
-    });
-
-    const { error } = useFormValidation();
-    const { isSignupButtonDisabled } = useSubmitButtonState(user, error);
-
-    const loginButtonPressed = () => {
-      console.log(user);
-    };
-    console.log(user);
-    return {
-      user,
-      isSignupButtonDisabled,
-      loginButtonPressed,
     };
   },
 
