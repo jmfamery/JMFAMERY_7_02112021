@@ -4,6 +4,8 @@ import Inscritpion from '../views/Inscription.vue'
 import SuppressionProfil from '../views/SuppressionProfil.vue'
 import Deconnexion from '../views/Deconnexion.vue'
 import Articles from '../views/Articles.vue'
+import CreerArticles from '../views/CreerArticles.vue'
+import ConsultationArticles from '../views/ConsultationArticles.vue'
 
 const routes = [
   {
@@ -32,6 +34,22 @@ const routes = [
     component: Articles,
     meta: {
       connecter: true
+    }
+  },
+  {
+    path: '/CreerArticles',
+    name: 'CreerArticles',
+    component: CreerArticles,
+    meta: {
+    connecter: true
+    }
+  },
+  {
+    path: '/ConsultationArticles',
+    name: 'ConsultationArticles',
+    component: ConsultationArticles,
+    meta: {
+    connecter: true
     }
   },
 ]

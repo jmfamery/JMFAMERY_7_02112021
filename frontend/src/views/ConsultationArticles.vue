@@ -2,7 +2,7 @@
   <Entete />
   <div class="container-fluid text-center">
     <h1 class="fw-bold fs-1 pt-5">Groupomania</h1>
-    <p class="fw-bold fs-3 mb-5">Liste des articles</p>
+    <p class="fw-bold fs-3 mb-5">Consultation d'un article</p>
   </div>
 
     <div div class="container d-flex justify-content-center">
@@ -33,7 +33,7 @@
         <div class="card-footer py-4">
           <div class="row">
             <div class="col text-center">
-              <button class="btn fondpageClaire fw-bold fs-5" @click="consulter()">consulter</button>
+              <button class="btn fondpageClaire fw-bold fs-5" @click="commentaire()">consulter les commentaires</button>
             </div>
           </div>
         </div>
@@ -41,11 +41,11 @@
     </div>
   </div>
 
-  <div class="container my-5" style="width: 12rem">
+  <div class="container my-5" style="width: 20rem">
     <div class="row">
       <div class="fondpage">
         <div class="col text-center my-3">
-          <button class="btn fondpageClaire fw-bold fs-5" @click="creer()">créer un article</button>
+          <button class="btn fondpageClaire fw-bold fs-5" @click="retour()">Retour à la liste des articles</button>
         </div>
       </div>
     </div>
@@ -67,10 +67,10 @@ export default {
 
   methods: {
     consulter() {
-      this.$router.push("/ConsultationArticles")
+
     },
-    creer() {
-      this.$router.push("/CreerArticles")
+    retour() {
+      this.$router.push("/Articles")
     }
   },
 }
