@@ -3,9 +3,11 @@ const sythemeFichier = require('fs');
 
 // création d'une Article
 exports.creationArticle = (req, res) => {
+  console.log("Création d'un article")
+  const image = `${req.protocol}://${req.get('host')}/images/${req.body.image}`
   const donnees = [
     req.body.titre,
-    `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    image,
     req.body.contenue,
     req.body.id_createur,
     req.body.date_creation,
