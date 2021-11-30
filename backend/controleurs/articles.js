@@ -4,6 +4,7 @@ const sythemeFichier = require('fs');
 // création d'une Article
 exports.creationArticle = (req, res) => {
   console.log("Création d'un article")
+  console.log(req.body)
   const image = `${req.protocol}://${req.get('host')}/images/${req.body.image}`
   const donnees = [
     req.body.titre,
@@ -48,7 +49,7 @@ exports.supressionArticle = (req, res) => {
 // Envoi d'une Article
 exports.envoiUnArticle = (req, res) => {
   let sql = 'SELECT * FROM article WHERE id = ?'
-  baseDonnees.query(sqlGetPost, req.body.id, (err, data) => {
+  baseDonnees.query(sql, req.body.id, (err, data) => {
       if (err) {
           return res.status(500).json(err.message);
       };
@@ -62,7 +63,7 @@ exports.envoiUnArticle = (req, res) => {
 // Envoi de toutes les Articles
 exports.envoiTousArticles = (req, res) => {
   let sql = 'SELECT * FROM article'
-  baseDonnees.query(sqlGetPost, req.body.id, (err, data) => {
+  baseDonnees.query(sql, (err, data) => {
       if (err) {
           return res.status(500).json(err.message);
       };
