@@ -98,15 +98,21 @@ export default {
   methods: {
     creation() {
       console.log("Création d'un article");
+      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+      const date = new Date()
+      const date_creation = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+      console.log(date_creation)
       axios
         .post("/article/creationArticle", {
           titre: this.titre,
           image: this.image,
           contenue: this.contenue,
-          id_createur : "1",
-          date_creation: "29/11/2021",
-          id_commentaire: "1"
-        })
+          id_createur : utilisateur.id,
+          date_creation: date_creation,
+          id_commentaire: ""
+        },
+        { headers: {Authorization: utilisateur.token}}
+        )
         .then((resultat) => {            
           console.log(resultat.data),
           this.$router.push("/Articles")

@@ -5,14 +5,14 @@
     <p class="fw-bold fs-3 mb-5">Liste des articles</p>
   </div>
 
-    <div div class="container d-flex justify-content-center">
-    <div class="card border border-2 rounded-3" style="width: 80rem">
+  <div class="container d-flex justify-content-center py-2" v-for="article in articles" :key="article.id">
+    <div class="card border border-2 rounded-3" style="width: 50rem">
       <div class="fondpage">
-        <div class="card-header text-center text-white pt-4">
+        <div class="card-header text-center text-white pt-2 pb-0">
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline fs-4">Titre</p>
+                <p class="text-decoration-underline text-white fs-5">{{article.titre}}</p>
               </div>
             </div>
           </div>
@@ -20,20 +20,20 @@
 
         <div class="card-body py-0 mx-2">
           <div class="row gx-2">
-            <div class="col-sm-3 border border-2 border-dark bg-white" style="height: 20rem">
-              <p class="img-fluid fs-4">Image</p>
+            <div class="col-sm-3 border border-2 border-dark bg-white" style="height: 5rem">
+              <p class="img-fluid"><img :src="article.image" :alt="article.image"></p>
             </div>
 
-            <div class="col-sm-9 border border-2 border-dark bg-white" style="height: 20rem">
-              <p class="overflow-auto fs-4">Texte</p>
+            <div class="col-sm-9 border border-2 border-dark bg-white" style="height: 5rem">
+              <p class="overflow-auto">{{article.contenue}}</p>
             </div>
           </div>
         </div>
   
-        <div class="card-footer py-4">
+        <div class="card-footer py-2">
           <div class="row">
             <div class="col text-center">
-              <button class="btn fondpageClaire fw-bold fs-5" @click="consulter()">consulter</button>
+              <button class="btn fondpageClaire fw-bold fs-5" @click="consulter(article)">consulter</button>
             </div>
           </div>
         </div>
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import axios from "axios"
 import Entete from "../components/Entete.vue"
 
 export default {
@@ -61,12 +62,29 @@ export default {
 
   data: () => {
     return {
-
+      articles: []
     }
   },
 
+  created() {
+    const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+    axios
+      .get("/article/envoiTousArticles", 
+      { headers: {Authorization: utilisateur.token} }
+      )
+      .then((resultat) => {            
+        this.articles=resultat.data
+        console.log(resultat.data)
+      })
+      .catch((error) => {
+        alert(error);
+      });   
+    },
+
   methods: {
-    consulter() {
+    consulter(article) {
+      console.log(article.id)
+      localStorage.setItem("article", JSON.stringify(article))
       this.$router.push("/ConsultationArticles")
     },
     creer() {

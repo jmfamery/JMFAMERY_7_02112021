@@ -12,7 +12,7 @@
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline fs-4">Titre</p>
+                <p class="text-decoration-underline fs-4">{{article.titre}}</p>
               </div>
             </div>
           </div>
@@ -21,11 +21,11 @@
         <div class="card-body py-0 mx-2">
           <div class="row gx-2">
             <div class="col-sm-3 border border-2 border-dark bg-white" style="height: 20rem">
-              <p class="img-fluid fs-4">Image</p>
+              <p class="img-fluid"><img :src="article.image" :alt="article.image"></p>
             </div>
 
             <div class="col-sm-9 border border-2 border-dark bg-white" style="height: 20rem">
-              <p class="overflow-auto fs-4">Texte</p>
+              <p class="overflow-auto fs-4">{{article.contenue}}</p>
             </div>
           </div>
         </div>
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+// import axios from "axios"
 import Entete from "../components/Entete.vue"
 
 export default {
@@ -60,16 +61,22 @@ export default {
   components: { Entete },
 
   data: () => {
-    return {
-
+    return {  
+      article: []
     }
   },
 
+  created() {
+    const articles = JSON.parse(localStorage.getItem("article"))
+    this.article = articles  
+    },
+
   methods: {
-    consulter() {
+    commentaire() {
 
     },
     retour() {
+      localStorage.removeItem("article")
       this.$router.push("/Articles")
     }
   },
