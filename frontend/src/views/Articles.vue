@@ -21,7 +21,7 @@
         <div class="card-body py-0 mx-2">
           <div class="row gx-2">
             <div class="col-sm-3 border border-2 border-dark bg-white" style="height: 5rem">
-              <p class="img-fluid"><img :src="article.image" :alt="article.image"></p>
+              <img class="img-fluid" :src="article.image" :alt="article.image">
             </div>
 
             <div class="col-sm-9 border border-2 border-dark bg-white" style="height: 5rem">
@@ -76,8 +76,8 @@ export default {
         this.articles=resultat.data
         console.log(resultat.data)
       })
-      .catch((error) => {
-        alert(error);
+      .catch(() => {
+        this.$router.push("/CreerArticles")
       });   
     },
 

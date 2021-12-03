@@ -35,7 +35,7 @@
                 type="file"
                 id="image"
                 required
-                v-on:change="image"
+                v-on:change="imageBrut($event)"
               />
             </div>
 
@@ -90,28 +90,28 @@ export default {
       image: "",
       contenue: "",
       id_createur: "",
-      date_creation: "",
-      id_commentaire: ""
+      date_creation: ""
     }
   },
 
   methods: {
+    imageBrut(event) {
+      this.image = event.target.files[0]
+    },
     creation() {
       console.log("Création d'un article");
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
       const date = new Date()
       const date_creation = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
-      console.log(date_creation)
+      const articleDonnees = new FormData()
+      articleDonnees.append("titre", this.titre)
+      articleDonnees.append("image", this.image)
+      articleDonnees.append("contenue", this.contenue)
+      articleDonnees.append("id_createur", utilisateur.id)
+      articleDonnees.append("date_creation", date_creation)
       axios
-        .post("/article/creationArticle", {
-          titre: this.titre,
-          image: this.image,
-          contenue: this.contenue,
-          id_createur : utilisateur.id,
-          date_creation: date_creation,
-          id_commentaire: ""
-        },
-        { headers: {Authorization: utilisateur.token}}
+        .post("/article/creationArticle", articleDonnees,
+          { headers: {Authorization: utilisateur.token}}
         )
         .then((resultat) => {            
           console.log(resultat.data),

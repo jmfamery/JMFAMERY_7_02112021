@@ -21,7 +21,7 @@
         <div class="card-body py-0 mx-2">
           <div class="row gx-2">
             <div class="col-sm-3 border border-2 border-dark bg-white" style="height: 20rem">
-              <p class="img-fluid"><img :src="article.image" :alt="article.image"></p>
+              <img class="img-fluid" :src="article.image" :alt="article.image">
             </div>
 
             <div class="col-sm-9 border border-2 border-dark bg-white" style="height: 20rem">
@@ -41,11 +41,17 @@
     </div>
   </div>
 
-  <div class="container my-5" style="width: 20rem">
-    <div class="row">
+  <div class="container d-flex justify-content-center my-5">
+    <div class="card border border-2 rounded-3" style="width: 80rem">
       <div class="fondpage">
-        <div class="col text-center my-3">
-          <button class="btn fondpageClaire fw-bold fs-5" @click="retour()">Retour à la liste des articles</button>
+        <div class="row">
+          <div class="col-sm-6 text-center my-3">        
+            <button class="btn fondpageClaire fw-bold fs-5" @click="supprimer()">Supprimer l'article</button>
+          </div>
+
+          <div class="col-sm-6 text-center my-3">
+            <button class="btn fondpageClaire fw-bold fs-5" @click="retour()">Retour à la liste des articles</button>
+          </div>
         </div>
       </div>
     </div>
@@ -53,7 +59,7 @@
 </template>
 
 <script>
-// import axios from "axios"
+import axios from "axios";
 import Entete from "../components/Entete.vue"
 
 export default {
@@ -73,6 +79,24 @@ export default {
 
   methods: {
     commentaire() {
+
+    },
+    supprimer() {
+      console.log("Suppression d'un article");
+      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+      console.log("article id : ",this.article.id)
+      axios
+        .delete("/article/suppressionArticle/" + this.article.id,
+          { headers: {Authorization: utilisateur.token}}
+        )
+        .then((resultat) => {            
+          console.log(resultat.data),
+          localStorage.removeItem("article"),
+          this.$router.push("/Articles")
+        })
+        .catch((error) => {
+          alert(error);
+        }); 
 
     },
     retour() {
