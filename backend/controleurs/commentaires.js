@@ -21,30 +21,24 @@ exports.creationCommentaire = (req, res) => {
   
   // Suppression d'un commentaire
   exports.supressionCommentaire = (req, res) => {
-    let sql = 'SELECT id FROM commentaire WHERE id = ?'
-    baseDonnees.query(sql, req.body.id, (err, res) => {
-      if (res > 0) {
-        const filename = Commentaires.imageUrl.split('/images/')[1]
-        sythemeFichier.unlink(`images/${filename}`, () => {
-          let sql = 'DELETE INTO commentaire WHERE id = ?'
-          baseDonnees.query(sql, req.body.id, (err, data) => {
-            if (err) {
-              return res.status(500).json(err.message)
-            }
-            res.status(200).json({ message: "Commentaire supprimé !" })
-          })
-        })
+    console.log("Suppression d'un commentaire")
+    console.log(req.params.id)
+    let sql = 'DELETE FROM commentaire WHERE id_article = ?'
+    baseDonnees.query(sql, req.params.id, (err, data) => {
+      if (err) {
+        return res.status(500).json(err.message)
       }
-    })  
+      res.status(200).json({ message: "Commentaire supprimé !" })
+    })
     if (err) {
       return res.status(500).json(err.message)
     }
   };
   
   // Envoi d'un commentaire
-  exports.envoiUnCommentaire = (req, res) => {
-    let sql = 'SELECT * FROM commentaire WHERE id = ?'
-    baseDonnees.query(sqlGetPost, req.body.id, (err, data) => {
+  exports.envoiCommentaireUnArticle = (req, res) => {
+    let sql = 'SELECT * FROM commentaire WHERE id_article = ?'
+    baseDonnees.query(sql, req.params.id, (err, data) => {
         if (err) {
             return res.status(500).json(err.message);
         };

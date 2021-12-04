@@ -1,13 +1,11 @@
+// Routeur sur la gestion des commentaires
 const express = require('express');
 const routeur = express.Router();
-
+const CommentairesCtrl = require('../controleurs/commentaires.js');
 const authentification = require('../intergiciel/authentification.js');
 
-const CommentairesCtrl = require('../controleurs/commentaires.js');
-
-// Routeur sur la gestion de la Commentaire
-routeur.post('/', authentification, CommentairesCtrl.creationCommentaire);
-routeur.delete('/:id', authentification, CommentairesCtrl.supressionCommentaire);
-routeur.get('/:id', authentification, CommentairesCtrl.envoiUnCommentaire);
+routeur.post('/creationCommentaire', authentification, CommentairesCtrl.creationCommentaire);
+routeur.delete('/supressionCommentaire/:id', authentification, CommentairesCtrl.supressionCommentaire);
+routeur.get('/envoiCommentaireUnArticle/:id', authentification, CommentairesCtrl.envoiCommentaireUnArticle);
 
 module.exports = routeur;
