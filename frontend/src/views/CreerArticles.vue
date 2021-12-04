@@ -81,7 +81,7 @@ import axios from "axios";
 import Entete from "../components/Entete.vue"
 
 export default {
-  name: "Accueil",
+  name: "CreerArticles",
   components: { Entete },
 
   data: () => {
@@ -99,7 +99,7 @@ export default {
       this.image = event.target.files[0]
     },
     creation() {
-      console.log("Création d'un article");
+      console.log("Création d'un article")
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
       const date = new Date()
       const date_creation = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()

@@ -57,7 +57,7 @@ import axios from "axios"
 import Entete from "../components/Entete.vue"
 
 export default {
-  name: "Accueil",
+  name: "Articles",
   components: { Entete },
 
   data: () => {
