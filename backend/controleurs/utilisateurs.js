@@ -59,7 +59,10 @@ exports.connexion = (req, res) => {
           prenom: data[0].prenom,
           moderateur: data[0].moderateur,          
           token: authentification.sign(
-            { id: data[0].id },
+            { 
+              id: data[0].id,
+              moderateur: data[0].moderateur
+            },
             codeSecurite,
             { expiresIn: '24h' }
           )
@@ -69,8 +72,23 @@ exports.connexion = (req, res) => {
     })
 }
 
+// Envoi d'une Article
+exports.envoiUnUtilisateur = (req, res) => {
+  let sql = 'SELECT nom, prenom FROM utilisateur WHERE id = ?'
+  baseDonnees.query(sql, req.params.id, (err, data) => {
+      if (err) {
+          return res.status(500).json(err.message);
+      };
+      if (data.length == 0) {
+          return res.status(400).json({ message: "Aucun utilisateur à afficher !" });
+      }
+      res.status(200).json(data);
+  })
+}
+
+// suppression d'un utilisateur
 exports.suppression = (req, res) => {
-  console.log("suppression Backend")
+  console.log("suppression Utilisateur")
   let sql = 'DELETE FROM utilisateur WHERE id = ?';
   baseDonnees.query(sql, req.body.id, (err) => {
     if (err) {

@@ -5,7 +5,8 @@ const CommentairesCtrl = require('../controleurs/commentaires.js');
 const authentification = require('../intergiciel/authentification.js');
 
 routeur.post('/creationCommentaire', authentification, CommentairesCtrl.creationCommentaire);
-routeur.delete('/supressionCommentaire/:id', authentification, CommentairesCtrl.supressionCommentaire);
+routeur.delete('/supressionTousCommentaires/:id', authentification, CommentairesCtrl.supressionTousCommentaires);
+routeur.delete('/supressionUnCommentaire/:id', authentification, CommentairesCtrl.supressionUnCommentaire);
 routeur.get('/envoiCommentaireUnArticle/:id', authentification, CommentairesCtrl.envoiCommentaireUnArticle);
 
 module.exports = routeur;

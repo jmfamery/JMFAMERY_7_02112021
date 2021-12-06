@@ -10,6 +10,8 @@ module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization;
     const decoderToken = authentification.verify(token, codeSecurite);
+    res.locals.utilisateurId = decoderToken.id;
+    res.locals.moderateur = decoderToken.moderateur;
     next()
   } catch (error) {
     res.status(401).json({message: 'Requête invalide!'});

@@ -4,16 +4,14 @@ const sythemeFichier = require('fs');
 // création d'une Article
 exports.creationArticle = (req, res) => {
   console.log("Création d'un article")
-  console.log("body :",req.body)
   const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}` 
   const donnees = [
     req.body.titre,
     image,
     req.body.contenue,
-    req.body.id_createur,
-    req.body.date_creation
+    res.locals.utilisateurId,
   ]
-  let sql = 'INSERT INTO article (titre, image, contenue, id_createur, date_creation) VALUES(?, ?, ?, ?, ?)'
+  let sql = 'INSERT INTO article (titre, image, contenue, id_createur, date_creation) VALUES(?, ?, ?, ?, NOW())'
   baseDonnees.query(sql, donnees, (err, data) => {
     if (err) {
       return res.status(500).json(err.message)
@@ -25,19 +23,23 @@ exports.creationArticle = (req, res) => {
 // Suppression d'une Article
 exports.supressionArticle = (req, res) => {
   console.log("Suppression d'un article")
-  let sqlImage = 'SELECT image FROM article WHERE id = ?'
+  let sqlImage = 'SELECT image, id_createur FROM article WHERE id = ?'
   baseDonnees.query(sqlImage, req.params.id, (err, data) => {
     if (data) {
-      const filename = data[0].image.split('/images/')[1]
-      sythemeFichier.unlink(`images/${filename}`, () => {
-        let sqlSuppression = 'DELETE FROM article WHERE id = ?'
-        baseDonnees.query(sqlSuppression, req.params.id, (err, data) => {
-          if (err) {
-            return res.status(500).json(err.message)
-          }
-          res.status(200).json({ message: "Article supprimé !" })
-          })
-      })
+      if (res.locals.utilisateurId === data[0].id_createur || res.locals.moderateur) {
+        const filename = data[0].image.split('/images/')[1]
+        sythemeFichier.unlink(`images/${filename}`, () => {
+          let sqlSuppression = 'DELETE FROM article WHERE id = ?'
+          baseDonnees.query(sqlSuppression, req.params.id, (err, data) => {
+            if (err) {
+              return res.status(500).json(err.message)
+            }
+            res.status(200).json({ message: "Article supprimé !" })
+            })
+        })
+      } {
+        res.status(401).json({ message: 'Vous n\'êtes pas l\'autheur Donc article non supprimer'})
+      }
     } 
     if (err) {
       return res.status(500).json(err.message)
