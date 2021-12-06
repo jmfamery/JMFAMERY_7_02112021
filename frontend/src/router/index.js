@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Connexion from '../views/Connexion.vue'
-import Inscritpion from '../views/Inscription.vue'
+import Inscription from '../views/Inscription.vue'
 import SuppressionProfil from '../views/SuppressionProfil.vue'
 import Deconnexion from '../views/Deconnexion.vue'
 import Articles from '../views/Articles.vue'
@@ -16,12 +16,15 @@ const routes = [
   {
     path: '/Inscription',
     name: 'Inscription',
-    component: Inscritpion
+    component: Inscription
   },
   {
     path: '/SuppressionProfil',
     name: 'SuppressionProfil',
-    component: SuppressionProfil
+    component: SuppressionProfil,
+    meta: {
+      connecter: true
+    }  
   },
   {
     path: '/Deconnexion',

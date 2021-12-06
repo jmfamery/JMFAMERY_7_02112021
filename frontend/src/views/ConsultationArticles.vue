@@ -2,7 +2,8 @@
   <Entete />
   <div class="container-fluid text-center">
     <h1 class="fw-bold fs-1 pt-5">Groupomania</h1>
-    <p class="fw-bold fs-3 mb-5">Consultation d'un article</p>
+    <p class="fw-bold fs-3 mb-2">Consultation d'un article</p>
+    <p class="fw-bold fs-2 mb-3">{{personne.prenom}} {{personne.nom}} </p>
   </div>
 
     <div div class="container d-flex justify-content-center">
@@ -12,7 +13,7 @@
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline fs-4">{{article.titre}}</p>
+                <p class="text-decoration-underline fs-4">{{article.titre}} de {{createurArticle[0].prenom}} {{createurArticle[0].nom}} </p>
               </div>
             </div>
           </div>
@@ -40,12 +41,12 @@
     </div>
   </div>
 
-  <div class="container d-flex justify-content-center my-5" v-if="message !== ''">
+  <div class="container d-flex justify-content-center my-5" v-if="base === 'vide'">
     <div class="card border border-2 rounded-3" style="width: 80rem">
       <div class="fondpage">
         <div class="row">
           <div class="col-sm-12 text-center my-3">        
-            <p class="text-white fs-4">{{message}}</p>
+            <p class="text-white fs-4">Pas de commentaire</p>
           </div>
         </div>
       </div>
@@ -76,6 +77,7 @@
         <div class="card-footer py-4">
           <div class="row">
             <div class="col text-center">
+              <button class="btn fondpageClaire fw-bold fs-5" @click="supprimerCommentaire(commentaire.id)">Supprimer le commentaire</button>
             </div>
           </div>
         </div>        
@@ -129,7 +131,7 @@
       <div class="fondpage">
         <div class="row">
           <div class="col-sm-6 text-center my-3">        
-            <button class="btn fondpageClaire fw-bold fs-5" @click="supprimer()">Supprimer l'article</button>
+            <button class="btn fondpageClaire fw-bold fs-5" @click="supprimerTous()">Supprimer l'article</button>
           </div>
 
           <div class="col-sm-6 text-center my-3">
@@ -153,14 +155,27 @@ export default {
     return {  
       commentaires: [],
       contenue: "",
-      message: ""
+      base: "plein"
     }
   },
 
   created() {
+    const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+    this.personne = utilisateur
     const articles = JSON.parse(localStorage.getItem("article"))
     this.article = articles
-    const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+    console.log(this.article.id_createur)
+    axios
+      .get("/utilisateur/envoiUnUtilisateur/" + this.article.id_createur,
+      { headers: {Authorization: utilisateur.token} }
+      )
+      .then((resultat) => {            
+        this.createurArticle=resultat.data
+        console.log(resultat.data)
+      })
+      .catch(() => {
+        
+      });
     axios
       .get("/commentaire/envoiCommentaireUnArticle/" + this.article.id,
       { headers: {Authorization: utilisateur.token} }
@@ -170,7 +185,7 @@ export default {
         console.log(resultat.data)
       })
       .catch(() => {
-        this.message = "Pas de commentaire"
+        this.base = "vide"
       });   
   },
 
@@ -178,13 +193,9 @@ export default {
     valideCommentaire() {
       console.log("Création d'un commentaire")
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-      const date = new Date()
-      const date_creation = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
       axios
         .post("/commentaire/creationCommentaire", {
           id_article: this.article.id,
-          id_createur: utilisateur.id,
-          date_creation: date_creation,
           contenue: this.contenue          
         },
           { headers: {Authorization: utilisateur.token}}
@@ -198,35 +209,50 @@ export default {
         });      
     },
 
-    supprimer() {
-      console.log("Suppression d'un article");
+    supprimerTous() {
+      console.log("Suppression d'un article et des commentaires");
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-      console.log("article id : ",this.article.id)
-      // if (this.message !== '') {
+      if (this.base === 'plein') {
         axios
-          .delete("/commentaire/supressionCommentaire/" + this.article.id,
+          .delete("/commentaire/supressionTousCommentaires/" + this.article.id,
           { headers: {Authorization: utilisateur.token}}
           )
           .then((resultat) => {            
-            console.log(resultat.data),
-            location.reload()
+            console.log(resultat.data)
           })
           .catch((error) => {
             alert(error);
           });
-      // }
-      // axios
-      //   .delete("/article/suppressionArticle/" + this.article.id,
-      //     { headers: {Authorization: utilisateur.token}}
-      //   )
-      //   .then((resultat) => {            
-      //     console.log(resultat.data),
-      //     localStorage.removeItem("article"),
-      //     this.$router.push("/Articles")
-      //   })
-      //   .catch((error) => {
-      //     alert(error);
-      //   });
+      }
+      axios
+        .delete("/article/suppressionArticle/" + this.article.id,
+          { headers: {Authorization: utilisateur.token}}
+        )
+        .then((resultat) => {            
+          console.log(resultat.data),
+          localStorage.removeItem("article"),
+          this.$router.push("/Articles")
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    },
+
+    supprimerCommentaire(id) {
+      console.log("Suppression des commentaires");
+      console.log(id)
+      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+      axios
+        .delete("/commentaire/supressionUnCommentaire/" + id,
+        { headers: {Authorization: utilisateur.token}}
+        )
+        .then((resultat) => {            
+          console.log(resultat.data),
+          location.reload()
+        })
+        .catch((error) => {
+          alert(error);
+        });     
     },
     
     retour() {

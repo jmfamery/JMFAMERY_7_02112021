@@ -2,7 +2,8 @@
   <Entete />
   <div class="container-fluid text-center">
     <h1 class="fw-bold fs-1 pt-5">Groupomania</h1>
-    <p class="fw-bold fs-3 mb-5">Liste des articles</p>
+    <p class="fw-bold fs-3 mb-2">Liste des articles</p>
+    <p class="fw-bold fs-2 mb-3">{{personne.prenom}} {{personne.nom}} </p>
   </div>
 
   <div class="container d-flex justify-content-center py-2" v-for="article in articles" :key="article.id">
@@ -68,6 +69,7 @@ export default {
 
   created() {
     const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+    this.personne = utilisateur
     axios
       .get("/article/envoiTousArticles", 
       { headers: {Authorization: utilisateur.token} }

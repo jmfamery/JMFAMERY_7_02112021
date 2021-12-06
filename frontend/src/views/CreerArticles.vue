@@ -88,9 +88,7 @@ export default {
     return {
       titre: "",
       image: "",
-      contenue: "",
-      id_createur: "",
-      date_creation: ""
+      contenue: ""
     }
   },
 
@@ -101,14 +99,10 @@ export default {
     creation() {
       console.log("Création d'un article")
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-      const date = new Date()
-      const date_creation = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
       const articleDonnees = new FormData()
       articleDonnees.append("titre", this.titre)
       articleDonnees.append("image", this.image)
       articleDonnees.append("contenue", this.contenue)
-      articleDonnees.append("id_createur", utilisateur.id)
-      articleDonnees.append("date_creation", date_creation)
       axios
         .post("/article/creationArticle", articleDonnees,
           { headers: {Authorization: utilisateur.token}}
