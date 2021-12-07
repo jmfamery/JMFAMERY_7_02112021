@@ -49,15 +49,13 @@ exports.supressionTousCommentaires = (req, res) => {
           }
           res.status(200).json({ message: "Commentaire supprimé !" })
         })
-      } {
-        res.status(401).json({ message: 'Vous n\'êtes pas l\'autheur Donc article non supprimer'})
-      }
+      } 
     })
   };
 
   // Envoi d'un commentaire
   exports.envoiCommentaireUnArticle = (req, res) => {
-    let sql = 'SELECT * FROM commentaire WHERE id_article = ?'
+    let sql = 'SELECT commentaire.*, DATE_FORMAT(date_creation, "%d/%m/%Y à %H:%i") date_creation, nom, prenom FROM commentaire LEFT JOIN utilisateur ON commentaire.id_createur = utilisateur.id WHERE commentaire.id_article = ? ORDER BY commentaire.date_creation ASC'
     baseDonnees.query(sql, req.params.id, (err, data) => {
         if (err) {
             return res.status(500).json(err.message);

@@ -13,7 +13,7 @@
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline text-white fs-5">{{article.titre}}</p>
+                <p class="text-decoration-underline text-white fs-5">{{article.titre}} de {{article.prenom}} {{article.nom}} du {{article.date_creation}}</p>
               </div>
             </div>
           </div>

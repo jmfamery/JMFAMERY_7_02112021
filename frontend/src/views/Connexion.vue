@@ -31,6 +31,14 @@
           </div>
         </div>
 
+        <div class="card-body py-4 mx-4">
+          <div class="row">
+            <div class="col text-center bg-white pt-2" v-if="this.entree === 'vide'">
+              <p class="text-danger fs-5"><strong>Veuillez entrer votre mail et ou votre mot de passe</strong></p>
+            </div>
+          </div>
+        </div>
+
         <div class="card-body py-0 mx-2">
           <div class="row">
             <div class="col-sm-6 pt-3">
@@ -60,6 +68,14 @@
             </div>
           </div>
         </div>
+
+        <div class="card-body py-4 mx-4">
+          <div class="row">
+            <div class="col text-center bg-white pt-2" v-if="this.entree === 'Ko'">
+              <p class="text-danger fs-5"><strong>Votre mail et ou votre mot de passe ne sont pas correctes</strong></p>
+            </div>
+          </div>
+        </div>
        
         <div class="card-footer py-4">
           <div class="row">
@@ -85,9 +101,7 @@ export default {
     return {
       email: "",
       mot_passe: "",
-      nom: "",
-      prenom: "",
-      moderateur: false,
+      entree: "Ok"
     };
   },
 
@@ -95,20 +109,23 @@ export default {
     // envoi des données pour la connexion du profil
     connexion() {       
       console.log("Connexion");
-      console.log("email : ",this.email)
-      axios
-        .post("/utilisateur/connexion", {
-          email: this.email,
-          mot_passe: this.mot_passe
-        })
-        .then((resultat) => {
-          localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
-          console.log(resultat.data),
-          this.$router.push("/Articles")
-        })
-        .catch((error) => {
-          alert(error)
-        });
+      if (this.email && this.mot_passe) {
+        axios
+          .post("/utilisateur/connexion", {
+            email: this.email,
+            mot_passe: this.mot_passe
+          })
+          .then((resultat) => {
+            localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
+            console.log(resultat.data),
+            this.$router.push("/Articles")
+          })
+          .catch(() => {
+            this.entree="Ko"
+          });
+      } {
+        this.entree="vide"
+      }
     }
   },
 }

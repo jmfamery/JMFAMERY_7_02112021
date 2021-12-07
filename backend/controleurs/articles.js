@@ -37,9 +37,7 @@ exports.supressionArticle = (req, res) => {
             res.status(200).json({ message: "Article supprimé !" })
             })
         })
-      } {
-        res.status(401).json({ message: 'Vous n\'êtes pas l\'autheur Donc article non supprimer'})
-      }
+      } 
     } 
     if (err) {
       return res.status(500).json(err.message)
@@ -63,7 +61,7 @@ exports.envoiUnArticle = (req, res) => {
 
 // Envoi de toutes les Articles
 exports.envoiTousArticles = (req, res) => {
-  let sql = 'SELECT * FROM article'
+  let sql = 'SELECT article.*, DATE_FORMAT(date_creation, "%d/%m/%Y à %H:%i") date_creation, nom, prenom FROM article LEFT JOIN utilisateur ON article.id_createur = utilisateur.id ORDER BY article.date_creation DESC'
   baseDonnees.query(sql, (err, data) => {
       if (err) {
           return res.status(500).json(err.message);

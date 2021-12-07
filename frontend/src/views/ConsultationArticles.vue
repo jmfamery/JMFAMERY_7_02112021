@@ -13,7 +13,7 @@
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline fs-4">{{article.titre}} de {{createurArticle[0].prenom}} {{createurArticle[0].nom}} </p>
+                <p class="text-decoration-underline fs-4">{{article.titre}} de {{article.prenom}} {{article.nom}} du {{article.date_creation}}</p>
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline fs-4">Commentaires</p>
+                <p class="text-decoration-underline fs-4">Commentaires de {{commentaire.prenom}} {{commentaire.nom}} du {{commentaire.date_creation}}</p>
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@
         
         <div class="card-footer py-4">
           <div class="row">
-            <div class="col text-center">
+            <div class="col text-center" v-if="(personne.id === commentaire.id_createur) || (personne.moderateur === 1)">
               <button class="btn fondpageClaire fw-bold fs-5" @click="supprimerCommentaire(commentaire.id)">Supprimer le commentaire</button>
             </div>
           </div>
@@ -130,7 +130,7 @@
     <div class="card border border-2 rounded-3" style="width: 80rem">
       <div class="fondpage">
         <div class="row">
-          <div class="col-sm-6 text-center my-3">        
+          <div class="col-sm-6 text-center my-3" v-if="(personne.id === article.id_createur) || (personne.moderateur === 1)">        
             <button class="btn fondpageClaire fw-bold fs-5" @click="supprimerTous()">Supprimer l'article</button>
           </div>
 
@@ -164,18 +164,6 @@ export default {
     this.personne = utilisateur
     const articles = JSON.parse(localStorage.getItem("article"))
     this.article = articles
-    console.log(this.article.id_createur)
-    axios
-      .get("/utilisateur/envoiUnUtilisateur/" + this.article.id_createur,
-      { headers: {Authorization: utilisateur.token} }
-      )
-      .then((resultat) => {            
-        this.createurArticle=resultat.data
-        console.log(resultat.data)
-      })
-      .catch(() => {
-        
-      });
     axios
       .get("/commentaire/envoiCommentaireUnArticle/" + this.article.id,
       { headers: {Authorization: utilisateur.token} }
@@ -186,7 +174,7 @@ export default {
       })
       .catch(() => {
         this.base = "vide"
-      });   
+      });
   },
 
   methods: {
