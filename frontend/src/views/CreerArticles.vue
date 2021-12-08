@@ -22,6 +22,9 @@
                   aria-label="Entrez votre titre de l'article"
                   v-model="titre"
                 />
+                <div class="col text-center bg-white rounded mt-1" v-if="this.entreeTitre === false">
+                  <p class="text-danger mx-1"><strong>Veuillez entrer un titre</strong></p>
+                </div>
               </div>
             </div>
           </div>
@@ -37,6 +40,9 @@
                 required
                 v-on:change="imageBrut($event)"
               />
+              <div class="col text-center bg-white rounded mt-1" v-if="this.entreeImage === false">
+                 <p class="text-danger mx-1"><strong>Veuillez selectionner un fichier png, jpg ou gif</strong></p>
+               </div>
             </div>
 
             <div class="col-sm-12">
@@ -50,6 +56,9 @@
                 aria-label="Entrez votre texte de l'article"
                 v-model="contenue"
               />
+              <div class="col text-center bg-white rounded mt-1" v-if="this.entreeContenue === false">
+                <p class="text-danger mx-1"><strong>Veuillez saisir votre article</strong></p>
+              </div>              
             </div>
           </div>
         </div>
@@ -88,7 +97,10 @@ export default {
     return {
       titre: "",
       image: "",
-      contenue: ""
+      contenue: "",
+      entreeTitre: true,
+      entreeImage: true,
+      entreeContenue: true
     }
   },
 
@@ -98,6 +110,11 @@ export default {
     },
     creation() {
       console.log("Création d'un article")
+      this.entreeTitre=Boolean(this.titre)
+      this.entreeImage=Boolean(this.image) //TODO filtre sur le format du fichier
+      this.entreeContenue=Boolean(this.contenue)
+      console.log("Titre ",this.entreeTitre,"image ",this.entreeImage,"contenue ",this.entreeContenue)
+      if (this.entreeTitre && this.entreeImage && this.entreeContenue) {
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
       const articleDonnees = new FormData()
       articleDonnees.append("titre", this.titre)
@@ -113,7 +130,8 @@ export default {
         })
         .catch((error) => {
           alert(error);
-        });   
+        }); 
+      }  
     },
 
     retour() {

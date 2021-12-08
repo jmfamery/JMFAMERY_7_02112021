@@ -42,6 +42,9 @@
                 aria-label="Entrez votre E-mail"
                 v-model="email"
               />
+              <div class="col text-center bg-white rounded mt-1" v-if="this.entreeEmail === false">
+                <p class="text-danger mx-1"><strong>Votre mail n'est pas correctes</strong></p>
+            </div>
             </div>
 
             <div class="col-sm-6 pt-3">
@@ -55,6 +58,9 @@
                 aria-label="Entrez votre mot de passe"
                 v-model="mot_passe"
               />
+              <div class="col text-center bg-white rounded mt-1" v-if="this.entreeMotPasse === false">
+                <p class="text-danger mx-1"><strong>Veuillez entrer un mot de passe avec 8 caractéres dont une lettre majuscule et un chiffre</strong></p>
+              </div>              
             </div>
           </div>
         </div>
@@ -72,6 +78,9 @@
                 aria-label="Entrez votre nom"
                 v-model="nom"
               />
+              <div class="col text-center bg-white rounded mt-1" v-if="this.entreeNom === false">
+                <p class="text-danger mx-1"><strong>Votre nom doit avoir entre 2 et 30 caractéres</strong></p>
+              </div>
             </div>
 
 
@@ -86,6 +95,9 @@
                 aria-label="Entrez votre prénom"
                 v-model="prenom"
               />
+              <div class="col text-center bg-white rounded mt-1" v-if="this.entreePrenom === false">
+                <p class="text-danger mx-1"><strong>Votre prénom doit avoir entre 2 et 30 caractéres</strong></p>
+              </div>              
             </div>
           </div>
         </div>
@@ -133,6 +145,10 @@ export default {
       nom: "",
       prenom: "",
       moderateur: false,
+      entreeEmail: true,
+      entreeMotPasse: true,
+      entreeNom: true,
+      entreePrenom: true,
     };
   },
 
@@ -140,22 +156,32 @@ export default {
     // envoi des données pour la création du profil
     creerCompte() {  
       console.log("Création du compte");
-      axios
-        .post("/utilisateur/inscrire", {
-          email: this.email,
-          mot_passe: this.mot_passe,
-          nom: this.nom,
-          prenom: this.prenom,
-          moderateur: this.moderateur
-        })
-        .then((resultat) => {            
-          localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
-          console.log(resultat.data),
-          this.$router.push("/")
-        })
-        .catch((error) => {
-          alert(error);
-        });          
+      const emailRegex = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/
+      const motPasseRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
+      const nomRegex = /[a-zA-Z-'`]+[ a-zA-Z-'`]{1,30}$/
+      this.entreeEmail = emailRegex.test(this.email)
+      this.entreeMotPasse = motPasseRegex.test(this.mot_passe)
+      this.entreeNom = nomRegex.test(this.nom)
+      this.entreePrenom = nomRegex.test(this.prenom)
+      console.log("mail ",this.entreeEmail," mot de passe ",this.entreeMotPasse," nom ",this.entreeNom," prenom ",this.entreePrenom)      
+      if (this.entreeEmail && this.entreeMotPasse && this.entreeNom && this.entreePrenom) {
+        axios
+          .post("/utilisateur/inscrire", {
+            email: this.email,
+            mot_passe: this.mot_passe,
+            nom: this.nom,
+            prenom: this.prenom,
+            moderateur: this.moderateur
+          })
+          .then((resultat) => {            
+            localStorage.setItem("Utilisateur", JSON.stringify(resultat.data)),
+            console.log(resultat.data),
+            this.$router.push("/")
+          })
+          .catch((error) => {
+            alert(error);
+          });  
+      } 
     }
   },
 }

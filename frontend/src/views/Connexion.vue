@@ -31,10 +31,16 @@
           </div>
         </div>
 
-        <div class="card-body py-4 mx-4">
+        <div class="card-body py-0 mx-4">
           <div class="row">
-            <div class="col text-center bg-white pt-2" v-if="this.entree === 'vide'">
+            <div class="col text-center bg-white rounded pt-2" v-if="this.entree === 'vide'">
               <p class="text-danger fs-5"><strong>Veuillez entrer votre mail et ou votre mot de passe</strong></p>
+            </div>
+            <div class="col text-center bg-white rounded pt-2" v-if="this.entree === '401'">
+              <p class="text-danger fs-5"><strong>Votre mail et ou votre mot de passe ne sont pas correctes</strong></p>
+            </div>
+            <div class="col text-center bg-white rounded pt-2" v-if="this.entree === '429'">
+              <p class="text-danger fs-5"><strong>E-mail bloqué suite à plus de 3 tentatives de connections</strong></p>
             </div>
           </div>
         </div>
@@ -65,14 +71,6 @@
                 aria-label="Entrez votre mot de passe"
                 v-model="mot_passe"
               />
-            </div>
-          </div>
-        </div>
-
-        <div class="card-body py-4 mx-4">
-          <div class="row">
-            <div class="col text-center bg-white pt-2" v-if="this.entree === 'Ko'">
-              <p class="text-danger fs-5"><strong>Votre mail et ou votre mot de passe ne sont pas correctes</strong></p>
             </div>
           </div>
         </div>
@@ -120,9 +118,18 @@ export default {
             console.log(resultat.data),
             this.$router.push("/Articles")
           })
-          .catch(() => {
-            this.entree="Ko"
+          .catch((error) => {
+            if (JSON.stringify(error.response.status) === "401") {
+              this.entree="401"
+            } else {
+              if (JSON.stringify(error.response.status) === "429") {
+                this.entree="429"
+              } else {
+                alert(error)
+              }
+            }
           });
+          this.entree="Ok"
       } {
         this.entree="vide"
       }
