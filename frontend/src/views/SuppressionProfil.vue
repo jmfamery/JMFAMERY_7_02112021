@@ -1,5 +1,6 @@
 <template>
   <Logo />
+  <Utilisateur />
   <div class="container-fluid text-center">
     <h1 class="fw-bold fs-1 py-5">Groupomania</h1>
   </div>
@@ -27,15 +28,31 @@
       </div>
     </div>
   </div>
+
+    <div class="container d-flex justify-content-center my-5">
+    <div class="card border border-2 rounded-3" style="width: 20rem">
+      <div class="fondpage">
+        <div class="row">
+          <div class="col-sm-12 text-center my-3">
+            <button class="btn fondpageClaire fw-bold fs-5" @click="retour()">Retour à la liste des articles</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import Logo from "../components/Logo.vue";
+import Utilisateur from "../components/Utilisateur.vue"
 
 export default {
   name: "Suppression",
-  components: { Logo },
+  components: { 
+    Logo,
+    Utilisateur
+  },
   data: () => {
     return {
       id: "",
@@ -59,7 +76,11 @@ methods: {
       .catch((error) => {
         alert(error)
       })
-    }
+    },
+
+  retour() {
+    this.$router.push("/Articles")
+  }    
   }
 }
 </script>

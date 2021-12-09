@@ -1,39 +1,39 @@
 <template>
   <Entete />
-  <div class="container-fluid text-center">
-    <h1 class="fw-bold fs-1 pt-5">Groupomania</h1>
-    <p class="fw-bold fs-3 mb-2">Consultation d'un article</p>
-    <p class="fw-bold fs-2 mb-3">{{personne.prenom}} {{personne.nom}} </p>
+  <Utilisateur />
+  <div class="container text-center">
+    <p class="text-decoration-underline fw-bold fs-2 my-4">Consultation de l'article :</p>
   </div>
 
-    <div div class="container d-flex justify-content-center">
-    <div class="card border border-2 rounded-3" style="width: 80rem">
+    <div div class="container justify-content-center">
+    <div class="card">
       <div class="fondpage">
-        <div class="card-header text-center text-white pt-4">
+        <div class="card-header text-center text-white pt-0">
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline fs-4">{{article.titre}} de {{article.prenom}} {{article.nom}} du {{article.date_creation}}</p>
+                <p class="text-decoration-underline fs-4 mb-0">{{article.titre}}</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card-body py-0 mx-2">
+        <div class="card-body py-0">
           <div class="row gx-2">
-            <div class="col-sm-3 border border-2 border-dark bg-white" style="height: 20rem">
+            <div class="col-sm-3 bg-white border-end border border-dark">
               <img class="img-fluid" :src="article.image" :alt="article.image">
             </div>
 
-            <div class="col-sm-9 border border-2 border-dark bg-white" style="height: 20rem">
-              <p class="overflow-auto fs-4">{{article.contenue}}</p>
+            <div class="col-sm-9 bg-white border-start border border-dark">
+              <p class="overflow-auto mb-1 fs-4">{{article.contenue}}</p>
             </div>
           </div>
         </div>
   
-        <div class="card-footer py-4">
+        <div class="card-footer pt-1 pb-0">
           <div class="row">
-            <div class="col text-center">
+            <div class="col text-start text-white">
+              <p class="pb-0">Auteur : {{article.prenom}} {{article.nom}} du {{article.date_creation}}</p>
             </div>
           </div>
         </div>
@@ -41,43 +41,43 @@
     </div>
   </div>
 
-  <div class="container d-flex justify-content-center my-5" v-if="base === 'vide'">
-    <div class="card border border-2 rounded-3" style="width: 80rem">
+  <div class="container justify-content-center my-3" v-if="base === 'vide'">
+    <div class="card">
       <div class="fondpage">
         <div class="row">
-          <div class="col-sm-12 text-center my-3">        
-            <p class="text-white fs-4">Pas de commentaire</p>
+          <div class="col text-center">        
+            <p class="text-white mb-1 fs-5">Pas de commentaire enregisté</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container d-flex justify-content-center my-5" v-for="commentaire in commentaires" :key="commentaire.id">
-    <div class="card border border-2 rounded-3" style="width: 80rem">
+  <div class="container my-1" v-for="commentaire in commentaires" :key="commentaire.id">
+    <div class="card">
       <div class="fondpage">
-        <div class="card-header text-center text-white pt-4">
+        <div class="card-header text-start text-white">
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline fs-4">Commentaires de {{commentaire.prenom}} {{commentaire.nom}} du {{commentaire.date_creation}}</p>
+                <p class="mb-0 fs-5">{{commentaire.prenom}} {{commentaire.nom}} du {{commentaire.date_creation}}</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card-body py-0 mx-2">
+        <div class="card-body py-0">
           <div class="row gx-2">
-            <div class="col border border-2 border-dark bg-white">
-              <p class="overflow-auto fs-4">{{commentaire.contenue}}</p>
+            <div class="col bg-white">
+              <p class="overflow-auto mb-1 fs-5">{{commentaire.contenue}}</p>
             </div>
           </div>
         </div>
         
-        <div class="card-footer py-4">
+        <div class="card-footer py-2">
           <div class="row">
             <div class="col text-center" v-if="(personne.id === commentaire.id_createur) || (personne.moderateur === 1)">
-              <button class="btn fondpageClaire fw-bold fs-5" @click="supprimerCommentaire(commentaire.id)">Supprimer le commentaire</button>
+              <button class="btn fondpageClaire pt-0 fw-bold fs-5" @click="supprimerCommentaire(commentaire.id)">Supprimer le commentaire</button>
             </div>
           </div>
         </div>        
@@ -85,24 +85,24 @@
     </div>
   </div>
 
-  <div class="container d-flex justify-content-center my-5">
-    <div class="card border border-2 rounded-3" style="width: 80rem">
+  <div class="container justify-content-center my-5">
+    <div class="card">
       <div class="fondpage">
-        <div class="card-header text-center text-white pt-4">
+        <div class="card-header text-center text-white">
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline fs-4">Commentaires</p>
+                <p class="mb-0 fs-4">Saisir un commentaires</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card-body py-0 mx-2">
-          <div class="row gx-2">
+        <div class="card-body py-0">
+          <div class="row">
             <div class="col">
               <input
-                class="form-control my-2"
+                class="form-control my-0"
                 type="text"
                 placeholder="Commentaire de l'article"
                 id="text"
@@ -111,14 +111,17 @@
                 aria-label="Entrez votre texte de l'article"
                 v-model="contenue"
               />
+              <div class="col text-center bg-white rounded mt-1" v-if="this.entreeContenue === false">
+                <p class="text-danger mx-1"><strong>Veuillez saisir votre commentaire</strong></p>
+              </div>  
             </div>
           </div>
         </div>
         
-        <div class="card-footer py-4">
+        <div class="card-footer py-2">
           <div class="row">
             <div class="col text-center">
-              <button class="btn fondpageClaire fw-bold fs-5" @click="valideCommentaire()">valider le commentaire</button>
+              <button class="btn fondpageClaire pt-0 fw-bold fs-5" @click="valideCommentaire()">valider le commentaire</button>
             </div>
           </div>
         </div>        
@@ -126,15 +129,20 @@
     </div>
   </div>
 
-  <div class="container d-flex justify-content-center my-5">
-    <div class="card border border-2 rounded-3" style="width: 80rem">
+  <div class="container justify-content-center my-5">
+    <div class="card">
       <div class="fondpage">
-        <div class="row">
-          <div class="col-sm-6 text-center my-3" v-if="(personne.id === article.id_createur) || (personne.moderateur === 1)">        
+        <div class="row" v-if="(personne.id === article.id_createur) || (personne.moderateur === 1)">
+          <div class="col-sm-6 text-center my-1" >        
             <button class="btn fondpageClaire fw-bold fs-5" @click="supprimerTous()">Supprimer l'article</button>
           </div>
 
-          <div class="col-sm-6 text-center my-3">
+          <div class="col-sm-6 text-center my-1">
+            <button class="btn fondpageClaire fw-bold fs-5" @click="retour()">Retour à la liste des articles</button>
+          </div>
+        </div>
+        <div class="row" v-else>
+          <div class="col text-center my-1">
             <button class="btn fondpageClaire fw-bold fs-5" @click="retour()">Retour à la liste des articles</button>
           </div>
         </div>
@@ -146,16 +154,21 @@
 <script>
 import axios from "axios";
 import Entete from "../components/Entete.vue"
+import Utilisateur from "../components/Utilisateur.vue"
 
 export default {
   name: "ConsultationArticles",
-  components: { Entete },
+  components: { 
+    Entete,
+    Utilisateur 
+  },
 
   data: () => {
     return {  
       commentaires: [],
       contenue: "",
-      base: "plein"
+      base: "plein",
+      entreeContenue: true
     }
   },
 
@@ -163,7 +176,7 @@ export default {
     const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
     this.personne = utilisateur
     const articles = JSON.parse(localStorage.getItem("article"))
-    this.article = articles
+    this.article = articles    
     axios
       .get("/commentaire/envoiCommentaireUnArticle/" + this.article.id,
       { headers: {Authorization: utilisateur.token} }
@@ -174,27 +187,30 @@ export default {
       })
       .catch(() => {
         this.base = "vide"
-      });
+      });      
   },
 
   methods: {
     valideCommentaire() {
       console.log("Création d'un commentaire")
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-      axios
-        .post("/commentaire/creationCommentaire", {
-          id_article: this.article.id,
-          contenue: this.contenue          
-        },
-          { headers: {Authorization: utilisateur.token}}
-        )
-        .then((resultat) => {            
-          console.log(resultat.data),
-          location.reload()
-        })
-        .catch((error) => {
-          alert(error);
-        });      
+      this.entreeContenue=Boolean(this.contenue)
+      if (this.contenue) {
+        axios
+          .post("/commentaire/creationCommentaire", {
+            id_article: this.article.id,
+            contenue: this.contenue          
+          },
+            { headers: {Authorization: utilisateur.token}}
+          )
+          .then((resultat) => {            
+            console.log(resultat.data),
+            location.reload()
+          })
+          .catch((error) => {
+            alert(error);
+          }); 
+      }
     },
 
     supprimerTous() {

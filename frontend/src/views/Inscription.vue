@@ -1,8 +1,7 @@
 <template>
   <Logo />
   <div class="container-fluid text-center">
-    <h1 class="fw-bold fs-1 pt-5 mb-2">Groupomania</h1>
-    <p class="fw-bold fs-2 mb-5">Bienvenue sur le site Intranet</p>
+    <p class="fw-bold fs-2 my-5">Bienvenue sur le site Intranet</p>
   </div>
 
   <div class="container d-flex justify-content-center">
@@ -12,7 +11,7 @@
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <h2>Inscription au site</h2>
+                <h1>Inscription à Groupomania</h1>
               </div>
             </div>
           </div>

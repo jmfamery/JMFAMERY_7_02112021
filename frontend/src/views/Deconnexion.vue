@@ -1,8 +1,7 @@
 <template>
   <Logo />
   <div class="container-fluid text-center">
-    <h1 class="fw-bold fs-1 pt-5 mb-2">Groupomania</h1>
-    <p class="fs-3 mb-5">Merci de votre visite sur le site intranet</p>
+    <p class="fs-3 my-5">Merci de votre visite sur le site intranet</p>
   </div>
 
   <div div class="container d-flex justify-content-center">

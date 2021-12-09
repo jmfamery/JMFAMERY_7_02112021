@@ -1,9 +1,8 @@
 <template>
   <Entete />
-  <div class="container-fluid text-center">
-    <h1 class="fw-bold fs-1 pt-5">Groupomania</h1>
-    <p class="fw-bold fs-3 mb-2">Liste des articles</p>
-    <p class="fw-bold fs-2 mb-3">{{personne.prenom}} {{personne.nom}} </p>
+  <Utilisateur />
+  <div class="container-fluid text-center">    
+    <h1 class="fw-bold fs-2 my-4">Liste des articles</h1>    
   </div>
 
   <div class="container d-flex justify-content-center py-2" v-for="article in articles" :key="article.id">
@@ -56,10 +55,14 @@
 <script>
 import axios from "axios"
 import Entete from "../components/Entete.vue"
+import Utilisateur from "../components/Utilisateur.vue"
 
 export default {
   name: "Articles",
-  components: { Entete },
+  components: { 
+    Entete,
+    Utilisateur 
+  },
 
   data: () => {
     return {
@@ -69,7 +72,6 @@ export default {
 
   created() {
     const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-    this.personne = utilisateur
     axios
       .get("/article/envoiTousArticles", 
       { headers: {Authorization: utilisateur.token} }
