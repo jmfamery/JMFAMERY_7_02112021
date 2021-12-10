@@ -1,19 +1,19 @@
 <template>
-  <Entete />
-  <div class="container-fluid text-center">
-    <h1 class="fw-bold fs-1 py-5">Groupomania</h1>
-  </div>
-
-    <div div class="container d-flex justify-content-center">
-    <div class="card border" style="width: 80rem">
+	<div div class="container pt-4 pb-0">
+    <div class="card border">
       <div class="fondpage">
-        <div class="card-header">
-          <div class="row">
-            <p class="text-center text-white fs-3 mb-0">Création d'un article</p>
+        <div class="card-header text-white">
+          <div class="row gx-2">
+            <div class="col text-start">
+              <p class="mb-0 fs-4">Création d'un article</p>
+            </div>
+            <div class="col text-end">
+              <button class="btn fondpageClaire pt-0 fw-bold" @click="creation()">Validation de l'article</button>
+            </div>
           </div>
         </div>
 
-        <div class="card-body py-0 mx-2">
+        <div class="card-body py-0">
           <div class="row gx-2">
             <div class="col-sm-12">
               <input
@@ -62,22 +62,7 @@
           </div>
         </div>
   
-        <div class="card-footer py-4">
-          <div class="row">
-            <div class="col text-center">
-              <button class="btn fondpageClaire fw-bold fs-5" @click="creation()">Validation de l'article</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container my-5" style="width: 20rem">
-    <div class="row">
-      <div class="fondpage">
-        <div class="col text-center my-3">
-          <button class="btn fondpageClaire fw-bold fs-5" @click="retour()">Retour à la liste des articles</button>
+        <div class="card-footer py-2">
         </div>
       </div>
     </div>
@@ -86,11 +71,9 @@
 
 <script>
 import axios from "axios";
-import Entete from "../components/Entete.vue"
 
 export default {
-  name: "CreerArticles",
-  components: { Entete },
+  name: "CreationArticles",
 
   data: () => {
     return {
@@ -131,16 +114,13 @@ export default {
           )
           .then((resultat) => {            
             console.log(resultat.data),
-            this.$router.push("/Articles")
+            location.reload()
+            
           })
           .catch((error) => {
             alert(error);
           }); 
       }  
-    },
-
-    retour() {
-      this.$router.push("/Articles")
     }
   },
 }

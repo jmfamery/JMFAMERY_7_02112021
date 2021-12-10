@@ -5,7 +5,7 @@
   </div>
 
   <div class="container d-flex justify-content-center">
-    <div class="card border border-2 rounded-3" style="width: 50rem">
+    <div class="card" style="width: 50rem">
       <div class="fondpage">
         <div class="card-header text-center text-white">
           <div class="row">
