@@ -8,6 +8,6 @@ const maximum = require('../intergiciel/connexion.js');
 routeur.post('/inscrire', utilisateurCtrl.inscrire);
 routeur.post('/connexion', maximum.limiteConnexion, utilisateurCtrl.connexion);
 routeur.get('/envoiUnUtilisateur/:id', authentification, utilisateurCtrl.envoiUnUtilisateur);
-routeur.delete('/suppression', authentification, utilisateurCtrl.suppression)
+routeur.delete('/suppression', utilisateurCtrl.suppression)
 
 module.exports = routeur;
