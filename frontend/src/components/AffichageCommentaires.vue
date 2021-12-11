@@ -19,7 +19,7 @@
             <div class="col text-start">
               <p class="mb-0">{{commentaire.prenom}} {{commentaire.nom}} du {{commentaire.date_creation}}</p>
             </div>
-            <div class="col text-end" v-if="(personne.id === commentaire.id_createur) || (personne.moderateur === true)">
+            <div class="col text-end" v-if="(personne.id === commentaire.id_createur) || (personne.moderateur === 1)">
               <button class="btn fondpageClaire pt-0 fw-bold" @click="supprimerCommentaire(commentaire.id)">Supprimer le commentaire</button>
             </div>
           </div>

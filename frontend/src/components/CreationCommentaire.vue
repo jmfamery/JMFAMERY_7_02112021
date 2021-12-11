@@ -16,7 +16,7 @@
         <div class="card-body py-0">
           <div class="row gx-2">
             <div class="col px-0">
-              <input
+              <textarea
                 class="form-control my-0"
                 type="text"
                 placeholder="Commentaire de l'article"
@@ -24,8 +24,8 @@
                 required
                 maxlength="250"
                 aria-label="Entrez votre texte de l'article"
-                v-model="contenue"
-              />
+                v-model="contenue">
+              </textarea>
               <div class="col text-center bg-white rounded mt-1" v-if="this.entreeContenue === false">
                 <p class="text-danger mx-1"><strong>Veuillez saisir votre commentaire</strong></p>
               </div>  

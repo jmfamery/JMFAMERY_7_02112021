@@ -37,7 +37,7 @@
                 placeholder="Votre email"
                 id="email"
                 required
-                maxlength="30"
+                maxlength="60"
                 aria-label="Entrez votre E-mail"
                 v-model="email"
               />
@@ -53,7 +53,7 @@
                 placeholder="Votre mot de passe"
                 id="mot_passe"
                 required
-                maxlength="30"
+                maxlength="100"
                 aria-label="Entrez votre mot de passe"
                 v-model="mot_passe"
               />
@@ -73,7 +73,7 @@
                 placeholder="Votre nom"
                 id="nom"
                 required
-                maxlength="30"
+                maxlength="60"
                 aria-label="Entrez votre nom"
                 v-model="nom"
               />
@@ -90,7 +90,7 @@
                 placeholder="Votre prénom"
                 id="prenom"
                 required
-                maxlength="30"
+                maxlength="60"
                 aria-label="Entrez votre prénom"
                 v-model="prenom"
               />

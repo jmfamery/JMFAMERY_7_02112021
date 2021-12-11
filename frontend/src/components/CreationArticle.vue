@@ -4,11 +4,11 @@
       <div class="fondpage">
         <div class="card-header text-white">
           <div class="row gx-2">
-            <div class="col text-start">
-              <p class="mb-0 fs-4">Création d'un article</p>
+            <div class="col text-start pt-1">
+              <p class="pt-1 mb-0 fs-4">Veuillez saisir votre article</p>
             </div>
-            <div class="col text-end">
-              <button class="btn fondpageClaire pt-0 fw-bold" @click="creation()">Validation de l'article</button>
+            <div class="col text-end pt-2">
+              <button class="btn fondpageClaire pt-1 mb-0 fw-bold" @click="creation()">Validation de l'article</button>
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
                 placeholder="Titre de l'article"
                 id="titre"
                 required
-                maxlength="30"
+                maxlength="100"
                 aria-label="Entrez votre titre de l'article"
                 v-model="titre"
               />
@@ -45,16 +45,16 @@
             </div>
 
             <div class="col-sm-12">
-             <input
+             <textarea
                 class="form-control my-2"
                 type="text"
                 placeholder="Texte de l'article"
                 id="texte"
                 required
-                maxlength="250"
+                maxlength="1000"
                 aria-label="Entrez votre texte de l'article"
-                v-model="contenue"
-              />
+                v-model="contenue">
+              </textarea>
               <div class="col text-center bg-white rounded mt-1" v-if="this.entreeContenue === false">
                 <p class="text-danger mx-1"><strong>Veuillez saisir votre article</strong></p>
               </div>              

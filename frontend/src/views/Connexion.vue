@@ -53,7 +53,7 @@
                 placeholder="Votre email"
                 id="email"
                 required
-                maxlength="30"
+                maxlength="60"
                 aria-label="Entrez votre E-mail"
                 v-model="email"
               />
@@ -66,7 +66,7 @@
                 placeholder="Votre mot de passe"
                 id="mot_passe"
                 required
-                maxlength="30"
+                maxlength="100"
                 aria-label="Entrez votre mot de passe"
                 v-model="mot_passe"
               />

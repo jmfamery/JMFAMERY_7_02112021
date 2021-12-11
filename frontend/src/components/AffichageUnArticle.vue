@@ -19,7 +19,7 @@
             </div>
 
             <div class="col-sm-9 bg-white border-start border border-dark">
-              <p class="overflow-auto mb-1 fs-4">{{article.contenue}}</p>
+              <p class="overflow-auto mb-1">{{article.contenue}}</p>
             </div>
           </div>
         </div>
@@ -29,7 +29,7 @@
             <div class="col text-start text-white">
               <p class="pb-0">Auteur : {{article.prenom}} {{article.nom}} du {{article.date_creation}}</p>
             </div>
-            <div class="col text-end" v-if="(personne.id === article.id_createur) || (personne.moderateur === true)">
+            <div class="col text-end" v-if="(personne.id === article.id_createur) || (personne.moderateur === 1)">
               <button class="btn fondpageClaire pt-0 fw-bold" @click="supprimerTous()">Supprimer l'article</button>
             </div>
           </div>
@@ -56,18 +56,16 @@ export default {
     supprimerTous() {
       console.log("Suppression d'un article et des commentaires");
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-      if (this.base === 'plein') {
-        axios
-          .delete("/commentaire/supressionTousCommentaires/" + this.article.id,
-          { headers: {Authorization: utilisateur.token}}
-          )
-          .then((resultat) => {            
-            console.log(resultat.data)
-          })
-          .catch((error) => {
-            alert(error);
-          });
-      }
+      axios
+        .delete("/commentaire/supressionTousCommentaires/" + this.article.id,
+        { headers: {Authorization: utilisateur.token}}
+        )
+        .then((resultat) => {            
+          console.log(resultat.data)
+        })
+        .catch((error) => {
+          alert(error);
+        });
       axios
         .delete("/article/suppressionArticle/" + this.article.id,
           { headers: {Authorization: utilisateur.token}}
