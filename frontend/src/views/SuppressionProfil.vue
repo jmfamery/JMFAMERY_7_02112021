@@ -65,12 +65,13 @@ methods: {
     console.log("Suppression")
     const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
     axios
-      .delete("/utilisateur/suppression", {
-      data: {id: utilisateur.id}
-      })
+      .delete("/utilisateur/suppression/" + utilisateur.id,
+        {headers: {Authorization: utilisateur.token}}        
+      )
       .then((resultat) => {
-        this.$router.push('/Deconnexion')
         localStorage.clear()
+        alert("Votre compte  a été supprimé")
+        this.$router.push('/Deconnexion')        
         console.log(resultat.data)
       })
       .catch((error) => {

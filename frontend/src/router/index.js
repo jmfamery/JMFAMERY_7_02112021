@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Connexion from '../views/Connexion.vue'
-import Inscription from '../views/Inscription.vue'
+import Accueil from '../views/Accueil.vue'
 import SuppressionProfil from '../views/SuppressionProfil.vue'
 import Deconnexion from '../views/Deconnexion.vue'
 import Articles from '../views/Articles.vue'
@@ -10,13 +9,8 @@ import ConsultationArticles from '../views/ConsultationArticles.vue'
 const routes = [
   {
     path: '/',
-    name: 'Connexion',
-    component: Connexion
-  },
-  {
-    path: '/Inscription',
-    name: 'Inscription',
-    component: Inscription
+    name: 'Accueil',
+    component: Accueil
   },
   {
     path: '/SuppressionProfil',
