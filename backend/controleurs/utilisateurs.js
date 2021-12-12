@@ -90,7 +90,7 @@ exports.envoiUnUtilisateur = (req, res) => {
 exports.suppression = (req, res) => {
   console.log("suppression Utilisateur")
   let sql = 'DELETE FROM utilisateur WHERE id = ?';
-  baseDonnees.query(sql, req.body.id, (err) => {
+  baseDonnees.query(sql, req.params.id, (err) => {
     if (err) {
       return res.status(400).json({ err: "La suppression du compte n'a pas été fait" });
     } 

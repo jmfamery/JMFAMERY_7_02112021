@@ -1,10 +1,8 @@
 const authentification = require('jsonwebtoken');
-//const baseDonnees = require('../applications.js');
-
-//authentification de l'utilisateur
 require('dotenv').config();
 const codeSecurite = process.env.cleSecurite;
 
+//authentification de l'utilisateur
 module.exports = (req, res, next) => {
   console.log("Authentification")
   try {
