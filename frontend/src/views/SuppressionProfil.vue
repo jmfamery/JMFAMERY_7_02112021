@@ -2,7 +2,7 @@
   <Logo />
   <Utilisateur />
   <div class="container-fluid text-center">
-    <h1 class="fw-bold fs-1 py-5">Groupomania</h1>
+    <h1 class="fw-bold fs-3 py-5">Suppression du Profil</h1>
   </div>
 
   <div class="container d-flex justify-content-center">

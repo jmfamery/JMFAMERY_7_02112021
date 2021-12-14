@@ -16,29 +16,39 @@
   <div class="card-body py-0 mx-2">
     <div class="row">
       <div class="col-sm-6 pt-3">
-        <input
-          class="form-control"
-          type="email"
-          placeholder="Votre email"
-          id="email"
-          required
-          maxlength="60"
-          aria-label="Entrez votre E-mail"
-          v-model="email"
-        />
+        <span class="input-group-text py-0 px-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-envelope-fill" viewBox="-5 0 25 15">
+            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+          </svg> 
+          <input
+            class="form-control"
+            type="email"
+            placeholder="Votre email"
+            id="email"
+            required
+            maxlength="60"
+            aria-label="Entrez votre E-mail"
+            v-model="email"
+          />
+        </span>
       </div>
 
       <div class="col-sm-6 pt-3">
-        <input
-          class="form-control"
-          type="password"
-          placeholder="Votre mot de passe"
-          id="mot_passe"
-          required
-          maxlength="100"
-          aria-label="Entrez votre mot de passe"
-          v-model="mot_passe"
-        />
+        <span class="input-group-text py-0 px-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-lock-fill" viewBox="-5 0 25 15">
+            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+          </svg>
+          <input
+            class="form-control"
+            type="password"
+            placeholder="Votre mot de passe"
+            id="mot_passe"
+            required
+            maxlength="100"
+            aria-label="Entrez votre mot de passe"
+            v-model="mot_passe"
+          />
+        </span>
       </div>
     </div>
   </div>

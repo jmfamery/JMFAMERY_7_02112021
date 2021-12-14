@@ -47,6 +47,9 @@ import axios from "axios";
 
 export default {
   name: "CreationCommentaire",
+  props: [
+    "id"
+  ],
 
   data: () => {
     return {  
@@ -55,27 +58,24 @@ export default {
     }
   },
 
-  created() {
-    const articles = JSON.parse(localStorage.getItem("article"))
-    this.article = articles         
-  },
-
   methods: {
     valideCommentaire() {
       console.log("Création d'un commentaire")
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
       this.entreeContenue=Boolean(this.contenue)
+      console.log(this.id)
       if (this.contenue) {
         axios
           .post("/commentaire/creationCommentaire", {
-            id_article: this.article.id,
+            id_article: this.id,
             contenue: this.contenue          
           },
             { headers: {Authorization: utilisateur.token}}
           )
           .then((resultat) => {            
-            console.log(resultat.data),
+            console.log(resultat.data)
             location.reload()
+            // this.$emit("rafraichircommentaire", "Rafraichissement des commentaires")
           })
           .catch((error) => {
             alert(error);

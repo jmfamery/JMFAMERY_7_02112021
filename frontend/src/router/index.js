@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Accueil from '../views/Accueil.vue'
 import SuppressionProfil from '../views/SuppressionProfil.vue'
+import Profil from '../views/Profil.vue'
 import Deconnexion from '../views/Deconnexion.vue'
 import Articles from '../views/Articles.vue'
 import CreerArticles from '../views/CreerArticles.vue'
@@ -16,6 +17,14 @@ const routes = [
     path: '/SuppressionProfil',
     name: 'SuppressionProfil',
     component: SuppressionProfil,
+    meta: {
+      connecter: true
+    }  
+  },
+  {
+    path: '/Profil',
+    name: 'Profil',
+    component: Profil,
     meta: {
       connecter: true
     }  
@@ -42,12 +51,13 @@ const routes = [
     }
   },
   {
-    path: '/ConsultationArticles',
+    path: '/ConsultationArticles/:id',
     name: 'ConsultationArticles',
     component: ConsultationArticles,
     meta: {
     connecter: true
-    }
+    },
+    props: true
   },
 ]
 

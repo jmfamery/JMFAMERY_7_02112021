@@ -1,5 +1,6 @@
 <template>
   <Logo />
+  
   <div class="container-fluid text-center">
     <p class="fw-bold fs-2 my-5">Bienvenue sur le site Intranet</p>
   </div>
@@ -93,12 +94,10 @@ export default {
   methods: {
     inscription() {
       this.accueil = "inscription"
-      // location.reload()
     },
 
     connexion() {
       this.accueil = "connexion"
-      // location.reload()
     }
   },
 }
