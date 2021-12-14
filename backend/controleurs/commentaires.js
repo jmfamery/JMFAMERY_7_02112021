@@ -55,7 +55,7 @@ exports.supressionTousCommentaires = (req, res) => {
 
   // Envoi d'un commentaire
   exports.envoiCommentaireUnArticle = (req, res) => {
-    let sql = 'SELECT commentaire.*, DATE_FORMAT(date_creation, "%d/%m/%Y à %H:%i") date_creation, nom, prenom FROM commentaire LEFT JOIN utilisateur ON commentaire.id_createur = utilisateur.id WHERE commentaire.id_article = ? ORDER BY commentaire.date_creation ASC'
+    let sql = 'SELECT commentaire.*, DATE_FORMAT(date_creation, "%d/%m/%Y à %H:%i") date_creation, nom, prenom FROM commentaire LEFT JOIN utilisateur ON commentaire.id_createur = utilisateur.id WHERE commentaire.id_article = ? ORDER BY commentaire.id'
     baseDonnees.query(sql, req.params.id, (err, data) => {
         if (err) {
             return res.status(500).json(err.message);
