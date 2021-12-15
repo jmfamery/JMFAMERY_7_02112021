@@ -4,9 +4,7 @@
       <div class="row">
         <nav class="navbar navbar-expand-md navbar-dark">
           <div class="navbar-brand" style="height:85px">
-            <!-- <router-link to="/"> -->
-              <img src="../assets/images/icon-left-font-monochrome-white-v2.svg" alt="logo" />
-            <!-- </router-link> -->
+            <img src="../assets/images/icon-left-font-monochrome-white-v2.svg" alt="logo" />
           </div>
         </nav>
       </div>

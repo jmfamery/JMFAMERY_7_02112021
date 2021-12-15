@@ -1,16 +1,4 @@
 <template>
-  <div class="container d-flex justify-content-center my-3" v-if="base === 'vide'">
-    <div class="card">
-      <div class="fondpage">
-        <div class="row gx-2">
-          <div class="col text-center">        
-            <p class="text-white mb-1 mx-2 fs-5">Pas de commentaire enregisté</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="container my-2">
     <div class="card">
       <div class="fondpage">
@@ -28,7 +16,7 @@
         <div class="card-body py-0">
           <div class="row gx-2">
             <div class="col bg-white">
-              <p class="overflow-auto mb-1 fs-5">{{contenue}}</p>
+              <p class="overflow-auto mb-1">{{contenue}}</p>
             </div>
           </div>
         </div>
@@ -58,15 +46,9 @@ export default {
     "prenom"
   ],
 
-  data: () => {
-    return {  
-      base: "plein"
-    }
-  },
-
   created() {
     const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-    this.personne = utilisateur    
+    this.personne = utilisateur
   },
 
   methods: {

@@ -47,9 +47,7 @@ import axios from "axios";
 
 export default {
   name: "CreationCommentaire",
-  props: [
-    "id"
-  ],
+  props: ["id"],
 
   data: () => {
     return {  
@@ -75,7 +73,7 @@ export default {
           .then((resultat) => {            
             console.log(resultat.data)
             location.reload()
-            // this.$emit("rafraichircommentaire", "Rafraichissement des commentaires")
+            this.$emit("rafraichirCommentaire", "Rafraichissement des commentaires")
           })
           .catch((error) => {
             alert(error);
