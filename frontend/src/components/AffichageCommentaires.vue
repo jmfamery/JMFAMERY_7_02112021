@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "AffichageCommentaires",
 
@@ -53,20 +51,7 @@ export default {
 
   methods: {
     supprimerCommentaire(id) {
-      console.log("Suppression des commentaires");
-      console.log(id)
-      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-      axios
-        .delete("/commentaire/supressionUnCommentaire/" + id,
-        { headers: {Authorization: utilisateur.token}}
-        )
-        .then((resultat) => {            
-          console.log(resultat.data),
-          location.reload()
-        })
-        .catch((error) => {
-          alert(error);
-        });     
+      this.$emit("effacerCommentaire", id)    
     }
   },
 }

@@ -40,8 +40,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "AffichageUnArticle",
   props: [
@@ -68,29 +66,7 @@ export default {
 
   methods: {
     supprimerTous() {
-      console.log("Suppression d'un article et des commentaires");
-      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-      axios
-        .delete("/commentaire/supressionTousCommentaires/" + this.id,
-        { headers: {Authorization: utilisateur.token}}
-        )
-        .then((resultat) => {            
-          console.log(resultat.data)
-        })
-        .catch((error) => {
-          alert(error);
-        });
-      axios
-        .delete("/article/suppressionArticle/" + this.id,
-          { headers: {Authorization: utilisateur.token}}
-        )
-        .then((resultat) => {            
-          console.log(resultat.data)
-          this.$router.push("/Articles")
-        })
-        .catch((error) => {
-          alert(error)
-        });
+      this.$emit("EffacerArticle")
     }
   },
 }

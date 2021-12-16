@@ -70,8 +70,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "CreationArticles",
 
@@ -103,23 +101,7 @@ export default {
       this.entreeContenue=Boolean(this.contenue)    
       console.log("Titre ",this.entreeTitre,"image ",this.entreeImage,"contenue ",this.entreeContenue)
       if (this.entreeTitre && this.entreeImage && this.entreeContenue) {
-        const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
-        const articleDonnees = new FormData()
-        articleDonnees.append("titre", this.titre)
-        articleDonnees.append("image", this.image)
-        articleDonnees.append("contenue", this.contenue)
-        axios
-          .post("/article/creationArticle", articleDonnees,
-            { headers: {Authorization: utilisateur.token}}
-          )
-          .then((resultat) => {            
-            console.log(resultat.data),
-            location.reload()
-            
-          })
-          .catch((error) => {
-            alert(error);
-          }); 
+        this.$emit("creationArticle", this.titre, this.image, this.contenue)
       }  
     }
   },

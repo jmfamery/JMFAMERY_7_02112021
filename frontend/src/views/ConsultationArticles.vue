@@ -6,41 +6,24 @@
     <p class="text-decoration-underline fw-bold fs-2 my-4">Consultation de l'article :</p>
   </div>
 
-  <AffichageUnArticle v-bind="article[0]"/>
+  <AffichageUnArticle 
+    v-bind="article[0]"
+    @effacerArticle="suppressionArticle"
+  />
 
-  <div class="container d-flex justify-content-center my-3" v-if="base === 'vide'">
-    <div class="card">
-      <div class="fondpage">
-        <div class="row gx-2">
-          <div class="col text-center">        
-            <p class="text-white mb-1 mx-2 fs-5">Pas de commentaire enregisté</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div v-if="base === 'vide'">
+    <CommentaireVide />
   </div>
 
   <AffichageCommentaires
     v-for="commentaire in commentaires" :key="commentaire.id" 
     v-bind="commentaire"
+    @effacerCommentaire="suppressionCommentaire"
   />
 
-  <CreationCommentaire
-    v-bind="articleId[0]"
-    @rafraichirCommentaire="rafraichir"
-  />
+  <CreationCommentaire @envoiCommentaire="nouveauCommentaire"/>
 
-  <div class="container d-flex justify-content-center my-5">
-    <div class="card">
-      <div class="fondpage">
-        <div class="row">
-          <div class="col text-center my-2">
-            <button class="btn fondpageClaire fw-bold mx-2 mt-0 fs-5" @click="retour()">Retour à la liste des articles</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <RetourArticles />
 </template>
 
 <script>
@@ -48,8 +31,10 @@ import axios from "axios";
 import Entete from "../components/Entete.vue"
 import Utilisateur from "../components/Utilisateur.vue"
 import AffichageUnArticle from "../components/AffichageUnArticle.vue"
+import CommentaireVide from "../components/CommentaireVide.vue"
 import AffichageCommentaires from "../components/AffichageCommentaires.vue"
 import CreationCommentaire from "../components/CreationCommentaire.vue"
+import RetourArticles from "../components/RetourArticles.vue"
 
 export default {
   name: "ConsultationArticles",
@@ -58,14 +43,15 @@ export default {
     Entete,
     Utilisateur,
     AffichageUnArticle,
+    CommentaireVide,
     AffichageCommentaires,
-    CreationCommentaire 
+    CreationCommentaire,
+    RetourArticles 
   },
 
   data() {
     return {
       article: "",
-      articleId: "",
       commentaires: [],
       base: "plein"
     }
@@ -80,7 +66,6 @@ export default {
       )
       .then((resultat) => {            
         this.article = resultat.data
-        this.articleId = resultat.data
         console.log(resultat.data)
       })
       .catch((error) => {
@@ -99,14 +84,67 @@ export default {
       })
   },
 
-  methods: {   
-    retour() {
-      this.$router.push("/Articles")
+  methods: {
+    suppressionArticle() {
+      console.log("Suppression d'un article et des commentaires");
+      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+      axios
+        .delete("/commentaire/supressionTousCommentaires/" + this.id,
+        { headers: {Authorization: utilisateur.token}}
+        )
+        .then((resultat) => {            
+          console.log(resultat.data)
+        })
+        .catch((error) => {
+          alert(error);
+        });
+      axios
+        .delete("/article/suppressionArticle/" + this.id,
+          { headers: {Authorization: utilisateur.token}}
+        )
+        .then((resultat) => {            
+          console.log(resultat.data)
+          this.$router.push("/Articles")
+        })
+        .catch((error) => {
+          alert(error)
+        });        
     },
 
-    rafraichir(message) {
-      console.log(message)
-      this.base = "nouveau"
+    suppressionCommentaire(suppressionId) {
+      console.log("Suppression des commentaires");
+      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+      axios
+        .delete("/commentaire/supressionUnCommentaire/" + suppressionId,
+        { headers: {Authorization: utilisateur.token}}
+        )
+        .then((resultat) => {            
+          console.log(resultat.data),
+          location.reload()
+        })
+        .catch((error) => {
+          alert(error);
+        });  
+    },
+
+    nouveauCommentaire(nouveauContenue) {
+      console.log("Création d'un commentaire")
+      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+      axios
+        .post("/commentaire/creationCommentaire", {
+          id_article: this.id,
+          contenue: nouveauContenue          
+        },
+          { headers: {Authorization: utilisateur.token}}
+        )
+        .then((resultat) => {            
+          console.log(resultat.data)
+          //this.$emit("commentaires")
+          location.reload()
+        })
+        .catch((error) => {
+          alert(error);
+        });
     }
   },
 }

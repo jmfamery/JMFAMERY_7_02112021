@@ -6,36 +6,46 @@
     <h1 class="text-decoration-underline fw-bold fs-2 my-4">Création d'un article</h1>
   </div>
 
-  <CreationArticle />
+  <CreationArticle @creationArticle="nouveauArticle"/>
 
-  <div class="container d-flex justify-content-center my-5">
-    <div class="row">
-      <div class="fondpage">
-        <div class="col text-center my-2">
-          <button class="btn fondpageClaire fw-bold mx-0 fs-5" @click="retour()">Retour à la liste des articles</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <RetourArticles />
 </template>
 
 <script>
+import axios from "axios"
 import Entete from "../components/Entete.vue"
 import Utilisateur from "../components/Utilisateur.vue"
 import CreationArticle from "../components/CreationArticle.vue"
+import RetourArticles from "../components/RetourArticles.vue"
 
 export default {
   name: "CreerArticles",
   components: { 
     Entete,
     Utilisateur,
-    CreationArticle 
+    CreationArticle,
+    RetourArticles 
   },
 
   methods: {
-    retour() {
-      this.$router.push("/Articles")
-    }
+    nouveauArticle(titre, image, contenue) {
+      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+      const articleDonnees = new FormData()
+      articleDonnees.append("titre", titre)
+      articleDonnees.append("image", image)
+      articleDonnees.append("contenue", contenue)
+      axios
+        .post("/article/creationArticle", articleDonnees,
+          { headers: {Authorization: utilisateur.token}}
+        )
+        .then((resultat) => {            
+          console.log(resultat.data),
+          this.$router.push("/Articles")            
+        })
+        .catch((error) => {
+          alert(error);
+        }); 
+    }  
   },
 }
 </script>

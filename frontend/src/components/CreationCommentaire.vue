@@ -43,11 +43,8 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "CreationCommentaire",
-  props: ["id"],
 
   data: () => {
     return {  
@@ -58,26 +55,9 @@ export default {
 
   methods: {
     valideCommentaire() {
-      console.log("Création d'un commentaire")
-      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
       this.entreeContenue=Boolean(this.contenue)
-      console.log(this.id)
       if (this.contenue) {
-        axios
-          .post("/commentaire/creationCommentaire", {
-            id_article: this.id,
-            contenue: this.contenue          
-          },
-            { headers: {Authorization: utilisateur.token}}
-          )
-          .then((resultat) => {            
-            console.log(resultat.data)
-            location.reload()
-            this.$emit("rafraichirCommentaire", "Rafraichissement des commentaires")
-          })
-          .catch((error) => {
-            alert(error);
-          }); 
+        this.$emit("envoiCommentaire", this.contenue)
       }
     }
   },
