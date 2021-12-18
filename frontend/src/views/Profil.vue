@@ -25,30 +25,22 @@
     </div>
   </div>
 
-  <div class="container d-flex justify-content-center my-5">
-    <div class="card">
-      <div class="fondpage">
-        <div class="row">
-          <div class="col text-center my-2">
-            <button class="btn fondpageClaire fw-bold mx-2 mt-0 fs-5" @click="retour()">Retour à la liste des articles</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <RetourArticles />
 </template>
 
 <script>
 import Entete from "../components/Entete.vue"
 import Utilisateur from "../components/Utilisateur.vue"
 import AffichageProfil from "../components/AffichageProfil.vue"
+import RetourArticles from "../components/RetourArticles.vue"
 
 export default {
   name: "Profil",
   components: { 
     Entete,
     Utilisateur,
-    AffichageProfil
+    AffichageProfil,
+    RetourArticles
   },
 
   methods: {

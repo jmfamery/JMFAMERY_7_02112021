@@ -66,7 +66,7 @@ export default {
 
   methods: {
     supprimerTous() {
-      this.$emit("EffacerArticle")
+      this.$emit("effacerArticle")
     }
   },
 }

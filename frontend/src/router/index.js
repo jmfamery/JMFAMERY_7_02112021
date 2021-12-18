@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Accueil from '../views/Accueil.vue'
+import Accueil from '../views/AccueilV2.vue'
 import SuppressionProfil from '../views/SuppressionProfil.vue'
 import Profil from '../views/Profil.vue'
 import Deconnexion from '../views/Deconnexion.vue'

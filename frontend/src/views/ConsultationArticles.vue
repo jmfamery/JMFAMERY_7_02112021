@@ -1,4 +1,4 @@
-<template>
+<template> <!--  v-bind:key="rafraichir" -->
   <Entete />
   <Utilisateur />
 
@@ -38,7 +38,8 @@ import RetourArticles from "../components/RetourArticles.vue"
 
 export default {
   name: "ConsultationArticles",
-  props:['id'],
+  props: ['id'],
+  // emits: ['rafraichir'],
   components: { 
     Entete,
     Utilisateur,
@@ -139,7 +140,7 @@ export default {
         )
         .then((resultat) => {            
           console.log(resultat.data)
-          //this.$emit("commentaires")
+          // this.$emit("rafraichir")
           location.reload()
         })
         .catch((error) => {
