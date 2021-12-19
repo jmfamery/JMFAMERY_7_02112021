@@ -7,6 +7,7 @@ const maximum = require('../intergiciel/connexion.js');
 
 routeur.post('/inscrire', utilisateurCtrl.inscrire);
 routeur.post('/connexion', maximum.limiteConnexion, utilisateurCtrl.connexion);
+routeur.put('/modification/:id', authentification, utilisateurCtrl.modification);
 routeur.get('/envoiUnUtilisateur/:id', authentification, utilisateurCtrl.envoiUnUtilisateur);
 routeur.delete('/suppression/:id', authentification, utilisateurCtrl.suppression)
 

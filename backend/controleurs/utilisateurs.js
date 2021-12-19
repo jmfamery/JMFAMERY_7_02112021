@@ -72,6 +72,20 @@ exports.connexion = (req, res) => {
     })
 }
 
+// modification d'un utilisateur
+exports.modification = (req, res) => {
+  console.log("modification Backend");
+  let sql = 'UPDATE utilisateur SET moderateur = ? WHERE id = ?'
+  const donnees = [req.body.moderateur, req.params.id]
+  baseDonnees.query(sql, donnees, (err) => {
+      if (err) {
+        console.log(err)
+        return res.status(400).json({ err: "La modification n'a pas été fait" });
+      }
+      res.status(200).json({ message: "la position moderateur a été modifié !" })
+    })
+  }
+
 // Envoi d'une Article
 exports.envoiUnUtilisateur = (req, res) => {
   let sql = 'SELECT nom, prenom FROM utilisateur WHERE id = ?'
