@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline text-white fs-4 mb-0">{{titre}}</p>
+                <h2 class="text-decoration-underline text-white fs-4 mb-0">{{titre}}</h2>
               </div>
             </div>
           </div>
@@ -15,7 +15,7 @@
         <div class="card-body py-0">
           <div class="row gx-2" >
             <div class="col-sm-3 bg-white border-end border border-dark">
-              <img class="img-fluid" :src="image" :alt="image">
+              <img class="img-fluid" :src="image" :alt="'image lier au poste'+ titre">
             </div>
 
             <div class="col-sm-9 bg-white border-start border border-dark" >
@@ -40,8 +40,6 @@
 </template>
 
 <script>
-// import axios from "axios"
-
 export default {
   name: "AffichageTousArticles",
   props: [
@@ -62,6 +60,7 @@ export default {
     }
   },
 
+  // envoi id pour la consultatin d'un article
   methods: {
     consulter(id) {
       console.log(id)      

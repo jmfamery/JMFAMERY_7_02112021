@@ -4,7 +4,7 @@
       <div class="row">
         <nav class="navbar navbar-expand-md navbar-dark">
           <div class="navbar-brand" style="height:85px">
-            <img src="../assets/images/icon-left-font-monochrome-white-v2.svg" alt="logo" />
+            <img src="../assets/images/icon-left-font-monochrome-white.svg" alt="logo de Groupomania" />
           </div>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
@@ -16,10 +16,6 @@
             <ul class="navbar-nav my-1">
               <li class="nav-item">
                 <button class="nav-link text-white fw-bold border-0 fondpage" @click="profil()">Profil</button>
-              </li>
-
-              <li class="nav-item">
-                <button class="nav-link text-white fw-bold border-0 fondpage" @click="suppression()">Suppression profil</button>
               </li>
 
               <li class="nav-item">
@@ -36,15 +32,14 @@
 <script>
 export default {
   name: 'Entete',
+
   methods: {
+    // Passage au views Profil
     profil () {
       this.$router.push('/Profil')
     },
 
-    suppression () {
-      this.$router.push('/SuppressionProfil')
-    },
-
+    // Passage au viewx Deconnexion et la suppression localStorage
     deconnexion () {
       this.$router.push('/Deconnexion'),
       localStorage.clear()

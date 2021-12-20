@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Accueil from '../views/AccueilV2.vue'
-import SuppressionProfil from '../views/SuppressionProfil.vue'
+import Accueil from '../views/Accueil.vue'
 import Profil from '../views/Profil.vue'
 import Deconnexion from '../views/Deconnexion.vue'
 import Articles from '../views/Articles.vue'
@@ -12,14 +11,6 @@ const routes = [
     path: '/',
     name: 'Accueil',
     component: Accueil
-  },
-  {
-    path: '/SuppressionProfil',
-    name: 'SuppressionProfil',
-    component: SuppressionProfil,
-    meta: {
-      connecter: true
-    }  
   },
   {
     path: '/Profil',
@@ -61,6 +52,7 @@ const routes = [
   },
 ]
 
+// Contrôle de l'utilisateur pour l'affichage de la page
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes

@@ -49,6 +49,7 @@ export default {
     this.personne = utilisateur
   },
 
+  // envoi id pour la suppression d'un commentaire
   methods: {
     supprimerCommentaire(id) {
       this.$emit("effacerCommentaire", id)    

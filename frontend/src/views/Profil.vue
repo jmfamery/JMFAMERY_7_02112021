@@ -43,6 +43,7 @@ export default {
     RetourArticles
   },
 
+  // Passage au Views Articles
   methods: {
     retout() {
       this.$router.push("/Articles")

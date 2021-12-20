@@ -6,7 +6,7 @@
           <div class="row gx-2">
             <div class="col">
               <div class="card-tilte">
-                <p class="text-decoration-underline fs-4 mb-0">{{titre}}</p>
+                <h2 class="text-decoration-underline fs-4 mb-0">{{titre}}</h2>
               </div>
             </div>
           </div>
@@ -15,7 +15,7 @@
         <div class="card-body py-0">
           <div class="row gx-2">
             <div class="col-sm-3 bg-white border-end border border-dark">
-              <img class="img-fluid" :src="image" :alt="image">
+              <img class="img-fluid" :src="image" :alt="'image lier au poste'+ titre">
             </div>
 
             <div class="col-sm-9 bg-white border-start border border-dark">
@@ -59,11 +59,13 @@ export default {
     }
   },
 
+  // récupération du localStorage des données de l'utilisateur pour le contrôle de la suppression de l'article
   created() {
     const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
     this.personne = utilisateur       
   },
 
+  // envoi pour la suppression de l'article
   methods: {
     supprimerTous() {
       this.$emit("effacerArticle")

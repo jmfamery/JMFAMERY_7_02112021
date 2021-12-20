@@ -85,9 +85,12 @@ export default {
   },
 
   methods: {
+    // récuperation de l'image
     imageBrut(event) {
       this.image = event.target.files[0]
     },
+
+    // contrôle et envoi des données pour la création d'un article
     creation() {
       console.log("Création d'un article")
       this.entreeTitre=Boolean(this.titre)

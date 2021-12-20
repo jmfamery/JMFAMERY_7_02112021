@@ -18,6 +18,7 @@
 export default {
   name: "Utilisateur",
 
+  // récupération du localStorage de l'utilisateur pour l'afficher
   created() {
     const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
     this.personne = utilisateur

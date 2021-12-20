@@ -15,7 +15,8 @@
 <script>
 export default {
   name: "RetourArticles",
-  
+
+  // Passage au Views Articles
   methods: {
     retour() {
       this.$router.push("/Articles")

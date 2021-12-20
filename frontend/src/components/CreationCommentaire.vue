@@ -5,7 +5,7 @@
         <div class="card-header text-white">
           <div class="row gx-2">
             <div class="col text-start">
-              <p class="mb-0 fs-4">Saisir un commentaire</p>
+              <h3 class="mb-0 fs-4">Saisir un commentaire</h3>
             </div>
             <div class="col text-end">
               <button class="btn fondpageClaire pt-0 fw-bold" @click="valideCommentaire()">valider le commentaire</button>
@@ -46,6 +46,8 @@
 export default {
   name: "CreationCommentaire",
 
+  emits: ["envoiCommentaire"],
+
   data: () => {
     return {  
       contenue: "",
@@ -53,6 +55,7 @@ export default {
     }
   },
 
+  // contrôle et envoi des données pour la création d'un commentaire
   methods: {
     valideCommentaire() {
       this.entreeContenue=Boolean(this.contenue)

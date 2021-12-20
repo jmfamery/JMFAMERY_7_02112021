@@ -55,6 +55,9 @@ export default {
   name: "TitreAccueil",
   props: ["accueil"],
 
+  emits: ["selection"],
+
+  // Envoi du choix du titre d'accueil
   methods: {
     inscription() {
       this.$emit("selection", "inscription")

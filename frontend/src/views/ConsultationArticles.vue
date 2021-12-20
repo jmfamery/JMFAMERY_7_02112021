@@ -1,9 +1,9 @@
-<template> <!--  v-bind:key="rafraichir" -->
+<template>
   <Entete />
   <Utilisateur />
 
   <div class="container text-center">
-    <p class="text-decoration-underline fw-bold fs-2 my-4">Consultation de l'article :</p>
+    <h1 class="text-decoration-underline fw-bold fs-2 my-4">Consultation de l'article :</h1>
   </div>
 
   <AffichageUnArticle 
@@ -39,7 +39,7 @@ import RetourArticles from "../components/RetourArticles.vue"
 export default {
   name: "ConsultationArticles",
   props: ['id'],
-  // emits: ['rafraichir'],
+
   components: { 
     Entete,
     Utilisateur,
@@ -58,6 +58,7 @@ export default {
     }
   },
 
+  // chargement d'un article
   created() {
     const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
     console.log(this.id)    
@@ -72,20 +73,11 @@ export default {
       .catch((error) => {
         alert(error);
       })
-    axios
-      .get("/commentaire/envoiCommentaireUnArticle/" + this.id,
-      { headers: {Authorization: utilisateur.token} }
-      )
-      .then((resultat) => {            
-        this.commentaires = resultat.data
-        console.log(resultat.data)
-      })
-      .catch(() => {
-        this.base = "vide"
-      })
+    this.recuperationCommentaire()
   },
 
   methods: {
+    // Suppression d'un article et de ces commentaires ratachés
     suppressionArticle() {
       console.log("Suppression d'un article et des commentaires");
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
@@ -112,6 +104,7 @@ export default {
         });        
     },
 
+    // Suppression d'un commentaire
     suppressionCommentaire(suppressionId) {
       console.log("Suppression des commentaires");
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
@@ -121,13 +114,14 @@ export default {
         )
         .then((resultat) => {            
           console.log(resultat.data),
-          location.reload()
+          this.recuperationCommentaire()
         })
         .catch((error) => {
           alert(error);
         });  
     },
 
+    // Enregistrement d'un nouveau commentaire
     nouveauCommentaire(nouveauContenue) {
       console.log("Création d'un commentaire")
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
@@ -140,13 +134,28 @@ export default {
         )
         .then((resultat) => {            
           console.log(resultat.data)
-          // this.$emit("rafraichir")
-          location.reload()
+          this.recuperationCommentaire()
         })
         .catch((error) => {
           alert(error);
         });
-    }
+    },
+
+    // chargement des commentaires ratachés à l'article
+    recuperationCommentaire() {
+      const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
+      axios
+        .get("/commentaire/envoiCommentaireUnArticle/" + this.id,
+        { headers: {Authorization: utilisateur.token} }
+        )
+        .then((resultat) => {            
+          this.commentaires = resultat.data
+          console.log(resultat.data)
+        })
+        .catch(() => {
+          this.base = "vide"
+        })
+      }
   },
 }
 </script>

@@ -76,8 +76,8 @@ export default {
     };
   },
 
+  // envoi des données pour la connexion du profil
   methods: {
-    // envoi des données pour la connexion du profil
     connexion() {       
       console.log("Connexion");
       if (this.email && this.mot_passe) {

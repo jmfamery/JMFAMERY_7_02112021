@@ -27,6 +27,7 @@ export default {
     RetourArticles 
   },
 
+  // Creation d'un nouveau article
   methods: {
     nouveauArticle(titre, image, contenue) {
       const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))

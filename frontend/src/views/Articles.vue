@@ -54,6 +54,7 @@ export default {
     }
   },
 
+  // Chargement de tous les articles
   created() {
     const utilisateur = JSON.parse(localStorage.getItem("Utilisateur"))
     axios
@@ -69,6 +70,7 @@ export default {
       });   
     },
 
+  // Passage au Views CreerArticles
   methods: {
     creer() {
       this.$router.push("/CreerArticles")

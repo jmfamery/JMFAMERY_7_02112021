@@ -1,7 +1,7 @@
 <template>
   <Logo />
   <div class="container-fluid text-center">
-    <p class="fs-3 my-5">Merci de votre visite sur le site intranet</p>
+    <h1 class="fs-3 my-5">Merci de votre visite sur le site intranet</h1>
   </div>
 
   <div div class="container d-flex justify-content-center">
@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col">
               <div class="card-tilte">
-                <p class="fs-4">Pour revenir à la page de connexion</p>
+                <h2 class="fs-4">Pour revenir à la page de connexion</h2>
                 <p class="fs-5">cliquer sur retour</p>
               </div>
             </div>
@@ -36,6 +36,8 @@ import Logo from "../components/Logo.vue";
 export default {
   name: "Deconnexion",
   components: { Logo },
+
+  // Passage au Views Accueil
   methods: {
     retour () {
       this.$router.push('/')

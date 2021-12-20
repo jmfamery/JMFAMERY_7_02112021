@@ -94,23 +94,6 @@
       </div>
     </div>
   </div>
-
-  <div class="card-body py-3 mx-2">
-    <div class="row">
-      <div class="col text-white" id="v-model-checkbox">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          value
-          id="moderateur"
-          v-model="moderateur"
-        />
-        <label class="form-check-label" for="moderateur">
-          <p class="mx-2">Cocher la case si vous êtes modérateur</p>
-        </label>
-      </div>
-    </div>
-  </div>
   
   <div class="card-footer pb-4">
     <div class="row">
@@ -141,8 +124,8 @@ export default {
     };
   },
 
+  // Contrôle et envoi des données pour la création du profil
   methods: {
-    // envoi des données pour la création du profil
     creerCompte() {  
       console.log("Création du compte");
       const emailRegex = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/
