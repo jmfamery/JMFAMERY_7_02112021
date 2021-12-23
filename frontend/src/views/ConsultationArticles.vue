@@ -13,15 +13,17 @@
 
   <div v-if="base === 'vide'">
     <CommentaireVide />
+    <CreationCommentaire @envoiCommentaire="nouveauCommentaire"/>
   </div>
 
-  <AffichageCommentaires
-    v-for="commentaire in commentaires" :key="commentaire.id" 
-    v-bind="commentaire"
-    @effacerCommentaire="suppressionCommentaire"
-  />
-
-  <CreationCommentaire @envoiCommentaire="nouveauCommentaire"/>
+  <div v-if="base === 'plein'">
+    <AffichageCommentaires
+      v-for="commentaire in commentaires" :key="commentaire.id" 
+      v-bind="commentaire"
+      @effacerCommentaire="suppressionCommentaire"
+    />
+    <CreationCommentaire @envoiCommentaire="nouveauCommentaire"/>
+  </div>  
 
   <RetourArticles />
 </template>
@@ -150,6 +152,7 @@ export default {
         )
         .then((resultat) => {            
           this.commentaires = resultat.data
+          this.base = "plein"
           console.log(resultat.data)
         })
         .catch(() => {
